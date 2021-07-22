@@ -13,7 +13,7 @@ public  class TranslucentButtonIconTest {
         setHorizontalAlignment(SwingConstants.CENTER);
         setHorizontalTextPosition(SwingConstants.CENTER);
         setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8));
-        setMargin(new Insets(2, 8, 2, 8));
+        //setMargin(new Insets(2, 8, 2, 8));
         setContentAreaFilled(false);
         setFocusPainted(false);
         setOpaque(false);
@@ -42,12 +42,12 @@ class TranslucentButtonIcon implements Icon {
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                           RenderingHints.VALUE_ANTIALIAS_ON);
       Shape area = new RoundRectangle2D.Float(x - i.left, y - i.top, w - 1, h - 1, R, R);
-      Color color = new Color(0f, 0f, 0f, .3f);
+      Color color = new Color(255,90,80,255);
       ButtonModel m = b.getModel();
       if (m.isPressed()) {
         color = new Color(0f, 0f, 0f, .3f);
       } else if (m.isRollover()) {
-        color = new Color(1f, 1f, 1f, .3f);
+        color = new Color(255,90,80,100);
       }
       g2.setPaint(color);
       g2.fill(area);
