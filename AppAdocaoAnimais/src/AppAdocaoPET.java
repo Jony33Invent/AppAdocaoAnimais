@@ -2,8 +2,9 @@
 public class AppAdocaoPET {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.print("teste");
+		Interface tela=new Interface();
+		tela.ExibeTelaEntrada();
+		//tela.ExibeTela2();
 	}
 
 }
