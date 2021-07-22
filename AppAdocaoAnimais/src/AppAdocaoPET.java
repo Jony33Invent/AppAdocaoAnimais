@@ -3,7 +3,8 @@ public class AppAdocaoPET {
 
 	public static void main(String[] args) {
 		Interface tela=new Interface();
-		tela.Exibe();
+		tela.ExibeTela1();
+		//tela.ExibeTela2();
 	}
 
 }
