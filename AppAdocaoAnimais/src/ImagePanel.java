@@ -27,15 +27,24 @@ private Image img;
     setMinimumSize(size);
     setMaximumSize(size);
     setSize(size);
-    setLayout(new FlowLayout());
+    setLayout(null);
   }
-	public JButton addButton(String s) {
-		JButton button=new JButton(s);
-		button.setBounds(500, 340, 0, 0);
+	public JButton addButtonCenterUp(String s) {
+		JButton button=new JButton(s);    
+		button.setLocation(95,190);
+        button.setSize(150, 50);
+
 		add(button);
 		return button;
 	}
+	public JButton addButtonCenterDown(String s) {
+		JButton button=new JButton(s);    
+		button.setLocation(95,275);
+        button.setSize(150, 50);
 
+		add(button);
+		return button;
+	}
   @Override
   public void paintComponent(Graphics g) {
     g.drawImage(img, 0, 0, null);

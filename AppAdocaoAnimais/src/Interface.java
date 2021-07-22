@@ -13,18 +13,18 @@ public class Interface extends JFrame{
 	
 	}
 	
-	public void ExibeTela1() {
+	public void ExibeTelaEntrada() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//setLayout(new FlowLayout());
 	    //Painel labelPanel=new Painel(new Color(255,90,80,255));
-	    ImagePainel buttonPanel=new ImagePainel("img/bg.png");
+	    ImagePainel entradaPainel=new ImagePainel("img/bg_entrar.png");
 
 
 	    //labelPanel.addTextLabel("Olá, tudo bem?");
-	    buttonPanel.addButton("Adotar");
-	    buttonPanel.addButton("Cadastrar");
+	    entradaPainel.addButtonCenterUp("Adotar");
+	    entradaPainel.addButtonCenterDown("Cadastrar");
 	    //add(labelPanel);
-	    add(buttonPanel);
+	    add(entradaPainel);
 	    
 	    pack();
 		setSize(350,622);
