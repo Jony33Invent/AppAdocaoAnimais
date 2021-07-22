@@ -21,8 +21,8 @@ public class Interface extends JFrame{
 
 
 	    //labelPanel.addTextLabel("Olá, tudo bem?");
-	    entradaPainel.addButtonCenterUp("Adotar");
-	    entradaPainel.addButtonCenterDown("Cadastrar");
+	    entradaPainel.addButton("Adotar",100,190);
+	    entradaPainel.addButton("Cadastro",100,270);
 	    //add(labelPanel);
 	    add(entradaPainel);
 	    

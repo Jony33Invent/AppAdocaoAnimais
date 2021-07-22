@@ -29,19 +29,12 @@ private Image img;
     setSize(size);
     setLayout(null);
   }
-	public JButton addButtonCenterUp(String s) {
-		JButton button=new JButton(s);    
-		button.setLocation(95,190);
+	public JButton addButton(String s, int x, int y) {
+		JButton button=TranslucentButtonIconTest.makeButton(s);    
+		button.setLocation(x,y);
         button.setSize(150, 50);
-
-		add(button);
-		return button;
-	}
-	public JButton addButtonCenterDown(String s) {
-		JButton button=new JButton(s);    
-		button.setLocation(95,275);
-        button.setSize(150, 50);
-
+        //button.setOpaque(false);
+        //button.setBorderPainted(false);
 		add(button);
 		return button;
 	}
@@ -50,3 +43,5 @@ private Image img;
     g.drawImage(img, 0, 0, null);
   }
 }
+
+
