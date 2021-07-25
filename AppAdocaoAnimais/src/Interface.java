@@ -1,53 +1,88 @@
-import java.awt.Color;
-//import java.awt.FlowLayout;
-//import java.awt.GridLayout;
 
-import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Interface extends JFrame{
+import javax.swing.*;
+
+public class Interface{
 	
-	private static final long serialVersionUID = -5529336786288984928L;
-
+	private JFrame telaEntrada;
+	private JFrame telaAdocao;
+	
 	public Interface() {
-		 super("PET Adoption - App");
+		 telaEntrada=new JFrame("PET Adoption - App");
+		 telaAdocao=new JFrame("PET Adoption - App");
 	
 	}
 	
-	public void ExibeTelaEntrada() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//setLayout(new FlowLayout());
-	    //Painel labelPanel=new Painel(new Color(255,90,80,255));
-	    ImagePainel entradaPainel=new ImagePainel("img/bg_entrar.png");
+	private Painel PainelEntrada() {
+		Painel entradaPainel=new Painel("img/bg_entrar.png");
 
 
 	    //labelPanel.addTextLabel("Olá, tudo bem?");
-	    entradaPainel.addButton("Adotar",100,190);
-	    entradaPainel.addButton("Cadastro",100,270);
-	    //add(labelPanel);
-	    add(entradaPainel);
+	    JButton adoptBtn=entradaPainel.addButton("Adotar",100,190);
+	    JButton registerBtn=entradaPainel.addButton("Cadastro",100,270);
 	    
-	    pack();
-		setSize(350,622);
-		setResizable(false);
-		setVisible(true);
+	    adoptBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    AdoptButtonPressed(telaEntrada);
+	    	  } 
+	    	} );
+	    return entradaPainel;
 	}
 	
-	public void ExibeTela2() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//setLayout(new FlowLayout());
-	    Painel labelPanel=new Painel(new Color(255,90,80,255));
-	    //ImagePainel buttonPanel=new ImagePainel("img/bg.png");
+	private Painel PainelAdocao() {
+		Painel adocaoPainel=new Painel("img/bg_solido.png");
 
 
-	    labelPanel.addTextLabel("Olá, tudo bem?");
-	    //buttonPanel.addButton("Clique aqui");
-	    add(labelPanel);
-	    //add(buttonPanel);
+	    JButton backBtn=adocaoPainel.addButton("Voltar",100,270);
 	    
-	    pack();
-		setSize(350,622);
-		setResizable(false);
-
-		setVisible(true);
+	    backBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenHomeScreen(telaEntrada);
+	    	  } 
+	    	} );
+	    return adocaoPainel;
 	}
+	
+	public void ExibeTelaEntrada() {
+		telaEntrada.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Painel p=PainelEntrada();
+
+	    telaEntrada.add(p);
+	    telaEntrada.pack();
+	    telaEntrada.setSize(350,622);
+	    CenterJFrame(telaEntrada);
+	    telaEntrada.setResizable(false);
+	    telaEntrada.setVisible(true);
+	}
+	
+	private void CenterJFrame(JFrame jf) {
+		  Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		  jf.setLocation(dim.width/2-jf.getSize().width/2, dim.height/2-jf.getSize().height/2);
+		    
+	}
+	private void OpenHomeScreen(JFrame currScreen) {
+		currScreen.getContentPane().removeAll();
+		
+		Painel p=PainelEntrada();
+
+		currScreen.getContentPane().add(p);
+
+		currScreen.revalidate();
+		currScreen.repaint();
+
+	}
+	private void AdoptButtonPressed(JFrame currScreen) {
+		currScreen.getContentPane().removeAll();
+		Painel p=PainelAdocao();
+
+		currScreen.getContentPane().add(p);
+
+		currScreen.revalidate();
+		currScreen.repaint();
+	}
+	
 }
