@@ -17,8 +17,7 @@ public class Interface{
 	public Interface() {
 		tela=new JFrame("PET Adoption - App");
 		try {
-		     GraphicsEnvironment ge = 
-		         GraphicsEnvironment.getLocalGraphicsEnvironment();
+		     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fonts//SansitaOne.ttf")));
 
 		} catch (Throwable e) {
@@ -46,6 +45,8 @@ public class Interface{
 	    return entradaPainel;
 	}
 	
+	
+	// Sessão Pessoal
 	private Painel PainelPessoal() {
 		Painel p=new Painel("img/bg_solido.png");
 
@@ -58,6 +59,11 @@ public class Interface{
 	    loginBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
 	    	    OpenNewPainel(LoginPessoal());
+	    	  } 
+	    	} );
+	    cadastroBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(CadastroPessoal());
 	    	  } 
 	    	} );
 	    backBtn.addActionListener(new ActionListener() { 
@@ -90,6 +96,29 @@ public class Interface{
 	    return p;
 	}
 	
+	private Painel CadastroPessoal() {
+		Painel p=new Painel("img/bg_solido.png");
+
+	    p.addLabelWhite("Cadastro",100,100);
+	    JTextField email=p.addTextField("E-mail:",100, 170);
+	    JPasswordField senha= p.addPasswordField("Senha:",100, 220);
+
+	    JPasswordField confSenha= p.addPasswordField("Conf. Senha:",100, 260);
+	    JButton enterAppBtn=p.addButton("Cadastrar",100,320);
+	    JButton backBtn=p.addButton("Voltar",100,400);
+	    enterAppBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(PessoalMenu());
+	    	  } 
+	    	} );
+	    backBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(PainelPessoal());
+	    	  } 
+	    	} );
+	    return p;
+	}
+	
 	private Painel PessoalMenu() {
 		Painel p=new Painel("img/bg_solido2.png");
 
@@ -102,6 +131,11 @@ public class Interface{
 	    adotarUmBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
 	    	    OpenNewPainel(AdotarMenu());
+	    	  } 
+	    	} );
+	    cadastrarUmBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(CadastrarAnimal());
 	    	  } 
 	    	} );
 	    backBtn.addActionListener(new ActionListener() { 
@@ -144,6 +178,59 @@ public class Interface{
 	    return p;
 	}
 	
+	private Painel CadastrarAnimal() {
+		Painel p=new Painel("img/bg_solido2.png");
+	    p.addLabelRed("Cadastro",35,20);
+
+	    String tipos[] = { "Gato", "Cachorro"};
+	    String sexos[] = { "Macho", "Femêa"};
+	    JTextField nome=p.addTextFieldRed("Nome:",130, 140);
+	    JTextField local=p.addTextFieldRed("Localização:",130, 170);
+	    JComboBox<String> tipo=p.addComboBox("Tipo:",130, 200,tipos);
+	    JComboBox<String> sexo=p.addComboBox("Sexo:",130, 230,sexos);
+	    JButton backBtn=p.addButton("Voltar",160,20);
+	    JSpinner idade=p.addNumericInput("Idade:", 130, 260);
+	    JCheckBox vacinado=p.addCheckBox("Vacinado", 200, 260);
+	    JCheckBox castrado=p.addCheckBox("Castrado", 200, 290);
+	    JTextArea descricao=p.addTextArea("Descrição", 100, 310);
+	    
+	    JButton cadastrarBtn=p.addButton("Cadastrar",160,500);
+	    cadastrarBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(PerfilAnimal());
+	    	  } 
+	    	} );
+	    backBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(PessoalMenu());
+	    	  } 
+	    	} );
+	    
+	    return p;
+	}
+	
+	private Painel PerfilAnimal() {
+		Painel p=new Painel("img/bg_solido.png");
+		
+	    p.addLabelWhite("Nome: ",100,100);
+
+	    p.addLabelWhite("Idade: ",100,130);
+
+	    p.addLabelWhite("Castrado: ",100,160);
+
+	    p.addLabelWhite("Localização: ",100,190);
+
+	    p.addLabelWhite("Descrição: ",100,220);
+	    
+	    JButton backBtn=p.addButton("Voltar",100,400);
+	    
+	    backBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(PessoalMenu());
+	    	  } 
+	    	} );
+		return p;
+	}
 	private Painel PainelPesquisar(int tipo) {
 		Painel p=new Painel("img/bg_solido2.png");
 		
@@ -176,6 +263,7 @@ public class Interface{
 	    return p;
 	}
 	
+	// Sessão Institucional
 	private Painel PainelInstitucional() {
 		Painel p=new Painel("img/bg_solido.png");
 
@@ -194,9 +282,11 @@ public class Interface{
 	    return p;
 	}
 
+	
+	
 	public void ExibeTelaEntrada() {
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Painel p=PainelEntrada();
+		Painel p=CadastrarAnimal();
 
 		tela.add(p);
 		tela.pack();
