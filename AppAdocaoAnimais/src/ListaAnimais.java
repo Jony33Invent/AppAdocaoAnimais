@@ -208,21 +208,18 @@ import java.util.List;
 									
 			return novaLista;
 		}
-<<<<<<< HEAD
 		
-		
-=======
-
 		public List<Animal> getAll(){
 			return animais;
 		}
+		
 		public void SetLista(List<Animal> novaLista){
 			animais=novaLista;
 		}
+		
 		public int getSize(){
 			return animais.size();
 		}
->>>>>>> 24d25668d7798edd06c3a9a97465a518443f145a
 	}
 	class SortByTipo implements Comparator<Animal>
 	{

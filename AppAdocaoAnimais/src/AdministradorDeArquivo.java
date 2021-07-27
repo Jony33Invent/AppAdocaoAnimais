@@ -24,8 +24,21 @@ public class AdministradorDeArquivo {
 		
 		if((st = animalBr.readLine()) == null) return false;
 		else {
-			st.split(" ");
+			String[] num = st.split(" ");
+			String nome = num[0];
+			int idade = num[1];
+			int porte = num[2];
+			vacinado = num[3];
+			castrado = num[4];
+			localizacao = num[5];
+			descricao = num[6];
+			sexo = num[7];
 		}
 		return true;
 	}
 }
+
+//String[] num = s.split(" ");
+//for(int i = 0; i < num.length; i++) {
+//	resultados[num[i].charAt(0) - '1'] = dado[num[i].charAt(0) - '1'].getLado(); 
+//}
