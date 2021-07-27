@@ -6,15 +6,17 @@ public class Animal {
 	private boolean castrado;
 	private String localizacao;
 	private String descricao;
+	private String sexo;
 
 	// Construtores
-	public Animal(String nom,int id, boolean vac, boolean cas, String loc, String des) {
+	public Animal(String nom, int id, boolean vac, boolean cas, String loc, String des, String sexo) {
 		setNome(nom);
 		setIdade(id);
 		setVacinado(vac);
 		setCastrado(cas);
 		setLocalizacao(loc);
 		setDescricao(des);
+		setSexo(sexo);
 	}
 	
 	public Animal(String nom,int id,String loc) {
@@ -77,5 +79,13 @@ public class Animal {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 }
