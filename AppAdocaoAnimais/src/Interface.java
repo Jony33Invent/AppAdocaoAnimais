@@ -203,18 +203,10 @@ public class Interface{
 	    int idade_animal = (int) idade.getValue();
 	    
 	    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
-	    boolean vacina_animal;
-	    if(vacinado.getSelectedObjects()==null)
-	    	vacina_animal = false;
-	    else
-	    	vacina_animal = true;
+	    boolean vacina_animal = vacinado.isSelected();
 	    
 	    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
-	    boolean castrado_animal;
-	    if(vacinado.getSelectedObjects()==null)
-	    	castrado_animal = false;
-	    else
-	    	castrado_animal = true;
+	    boolean castrado_animal = castrado.isSelected();
 	    
 	    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
 	    String descricao_animal = descricao.getText();
@@ -230,7 +222,7 @@ public class Interface{
 	    		}
 	    		else {
 		    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
-		    		    		descricao_animal, sexo_animal);	
+		    		    		descricao_animal, sexo_animal);
 	    		}
 	    		OpenNewPainel(PerfilAnimal(animal));
 	    	}
