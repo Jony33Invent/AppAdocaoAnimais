@@ -5,7 +5,7 @@ public class Conta {
 	private String email;
 	private String senha;
 	
-	public Conta (String email, String senha, String nom, String end) {
+	public Conta (String nom, String end, String email, String senha) {
 		setEmail(email);
 		setSenha(senha);
 		setNome(nom);

@@ -7,6 +7,9 @@ public class ContaEmpresa extends Conta{
 		setCNPJ(cNPJ);
 	}
 
+	public ContaEmpresa(String nom, String end, String email, String senha) {
+		super(nom,end,email,senha);
+	}
 	public int getCNPJ() {
 		return CNPJ;
 	}

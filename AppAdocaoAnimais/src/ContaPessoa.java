@@ -6,6 +6,9 @@ public class ContaPessoa extends Conta{
 		super(email, senha, nome, endereco);
 		setCPF(cPF);
 	}
+	public ContaPessoa(String nom, String end, String email, String senha) {
+		super(nom,end,email,senha);
+	}
 	
 	public int getCPF() {
 		return CPF;
