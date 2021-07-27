@@ -233,7 +233,7 @@ public class Interface{
 		    		    		descricao_animal, sexo_animal);	
 	    		}
 	    		OpenNewPainel(PerfilAnimal(animal));
-	    	} 
+	    	}
 	    } );
 	    
 	    backBtn.addActionListener(new ActionListener() { 
