@@ -186,51 +186,53 @@ public class Interface{
 	    String sexos[] = { "Macho", "Femêa"};
 	    
 	    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
-	    String nome_animal = nome.getText();
-	    
-	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
-	    String local_animal = local.getText();
-	    
-	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
-	    String tipo_animal = (String) tipo.getSelectedItem();
-	    
-	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
-	    String sexo_animal = (String) sexo.getSelectedItem();
-	    
 	    JButton backBtn = p.addButton("Voltar",160, 20);
-	    
+	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
+	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
+	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
 	    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
-	    int idade_animal = (int) idade.getValue();
-	    
 	    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
-	    boolean vacina_animal;
-	    if(vacinado.getSelectedObjects()==null)
-	    	vacina_animal = false;
-	    else
-	    	vacina_animal = true;
-	    
 	    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
-	    boolean castrado_animal;
-	    if(vacinado.getSelectedObjects()==null)
-	    	castrado_animal = false;
-	    else
-	    	castrado_animal = true;
-	    
 	    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
-	    String descricao_animal = descricao.getText();
-	    
 	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
+	    
 	    cadastrarBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) {
-	    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
-	    		    		descricao_animal);
-	    		OpenNewPainel(PerfilAnimal(animal));
-	    	} 
+
+	    	    String nome_animal = nome.getText();
+	    	    String local_animal = local.getText();
+	    	    String tipo_animal = (String) tipo.getSelectedItem();
+	    	    String sexo_animal = (String) sexo.getSelectedItem();
+	    	    int idade_animal = (int) idade.getValue();
+	    	    boolean vacina_animal = vacinado.isSelected();
+	    	    boolean castrado_animal = castrado.isSelected();
+	    	    String descricao_animal = descricao.getText();
+	    	    
+	    	    
+	    		
+	    		
+	    		if(tipo_animal == "Gato") {
+	    			Gato gato = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    		
+	    			OpenNewPainel(PerfilAnimal(gato));
+				}
+	    		else if(tipo_animal == "Cachorro") {
+	    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    		
+	    			OpenNewPainel(PerfilAnimal(cachorro));
+				}
+	    		else {
+		    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
+		    		    		descricao_animal, sexo_animal);
+								
+	    			OpenNewPainel(PerfilAnimal(animal));
+	    		}
+	    	}
 	    } );
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
-	    		OpenNewPainel(PessoalMenu());
+	    		OpenNewPainel(CadastrarAnimal());
 	    	} 
 	    } );
 	    
@@ -240,15 +242,17 @@ public class Interface{
 	private Painel PerfilAnimal(Animal a) {
 		Painel p=new Painel("img/bg_solido.png");
 		
-	    p.addLabelWhite("Nome: ", 100, 100);
+	    p.addLabelWhite("Nome: "+a.getNome(), 100, 100);
 
-	    p.addLabelWhite("Idade: ", 100, 130);
+	    p.addLabelWhite("Idade: "+a.getIdade(), 100, 130);
 
-	    p.addLabelWhite("Castrado: ", 100, 160);
+	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 100, 160);
 
-	    p.addLabelWhite("Localização: ", 100, 190);
+	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 100, 190);
 
-	    p.addLabelWhite("Descrição: ", 100, 220);
+	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 100, 220);
+
+	    p.addLabelWhite("Descrição: "+a.getDescricao(), 100, 250);
 	    
 	    JButton backBtn = p.addButton("Voltar", 100, 400);
 	    
