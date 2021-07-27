@@ -21,21 +21,21 @@ import java.util.List;
 		}
 		
 		/**/
-		public void add_animal_cao(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
-			Animal cao = new Cachorro(nom, id, porte, vac, cas, loc, des,sexo);
+		public void add_animal_cao(int key, String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal cao = new Cachorro(key, nom, id, porte, vac, cas, loc, des,sexo);
 			animais.add(cao);
 			num_animais++;
 			num_caes++;
 		}
-		public void add_animal_nome(String nom) {
-			Animal cao = new Cachorro(nom, 0, 0, true, true, "", "","Macho");
+		public void add_animal_nome(String nom, int key) {
+			Animal cao = new Cachorro(key, nom, 0, 0, true, true, "", "","Macho");
 			animais.add(cao);
 			num_animais++;
 			num_caes++;
 		}
 		/**/
-		public void add_animal_gato(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
-			Animal gato = new Gato(nom, id, porte, vac, cas, loc, des, sexo);
+		public void add_animal_gato(int key, String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal gato = new Gato(key, nom, id, porte, vac, cas, loc, des, sexo);
 			animais.add(gato);
 			num_animais++;
 			num_gatos++;

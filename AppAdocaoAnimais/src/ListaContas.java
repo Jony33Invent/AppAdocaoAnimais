@@ -10,6 +10,14 @@ public class ListaContas {
 		num_contas = 0;
 	}
 	
+	public int getNumContas() {
+		return num_contas;
+	}
+	
+	public Conta pegaConta(int i) {
+		return this.contas.get(i);
+	}
+	
 	public boolean contaExistente(String email) {
 		for(int i = 0; i < num_contas; i++) {
 			if(this.contas.get(i).getEmail().compareTo(email) == 0) return true;
@@ -18,14 +26,19 @@ public class ListaContas {
 		return false;
 	}
 	
-	public boolean addConta(String nome, String endereco, String email, String senha) {
+	public boolean addConta(int key, String nome, String endereco, String email, String senha) {
 		if(this.contaExistente(email)) return false;
 		
-		Conta novaConta = new Conta(nome, endereco, email, senha);
+		Conta novaConta = new Conta(key, nome, endereco, email, senha);
 		
 		this.contas.add(novaConta);
-		
+		num_contas++;
 		return true;
+	}
+	
+	public void addConta(Conta novaConta) {
+		this.contas.add(novaConta);
+		this.num_contas++;
 	}
 	
 	public boolean checkSenha(String email, String senha) {
