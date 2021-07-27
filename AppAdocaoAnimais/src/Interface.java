@@ -16,6 +16,7 @@ public class Interface{
 	
 	private JFrame tela;
 	private ListaAnimais listaAnimais;
+	private ListaAnimais ultimaBusca;
 	public Interface() {
 		tela=new JFrame("PET Adoption - App");
 		listaAnimais=new ListaAnimais();
@@ -224,7 +225,7 @@ public class Interface{
 				}
 	    		else if(tipo_animal == "Cachorro") {
 	    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
-	    			listaAnimais.add_animal_cachorro(cachorro);
+	    			listaAnimais.add_animal_cao(cachorro);
 	    			OpenNewPainel(PerfilAnimal(cachorro,CadastrarAnimal()));
 				}
 	    	}
@@ -274,7 +275,6 @@ public class Interface{
 	
 	private Painel PainelPesquisar(int tipo) {
 		Painel p = new Painel("img/bg_solido2.png");
-		
 		/* tipo
 		 *  1 -> cão
 		 *  2 -> gato
@@ -299,11 +299,10 @@ public class Interface{
 	    JTextField local = p.addTextFieldRed("Localização:", 130, 190);
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    JButton searchBtn=p.addButton("Pesquisar",100,300);
-	    
 	    searchBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
 	    		
-	    	    OpenNewPainel(ExibePesquisa(tipo));
+	    	    OpenNewPainel(ExibePesquisa(tipo,nome.getText(),local.getText()));
 	    	  } 
 	    	} );
 	    
@@ -314,6 +313,72 @@ public class Interface{
 	    	} );
 	    return p;
 	}
+	
+	
+	private Painel ExibePesquisa(int tipo,String nome, String local) {
+
+		Painel p=new Painel("img/bg_solido.png");
+		JScrollPane scroll=p.addScrollPane(-30,60);
+		Painel animais=new Painel("img/bg_solido2.png");
+	    String str="";
+		switch(tipo) {
+		case 1:
+			str="Resultados da busca por cão";
+		break;
+		case 2:
+			str="Resultados da busca por gato";
+		break;
+		case 0:
+			str="Resultados da busca";
+		break;
+	}
+	    p.addLabelWhite(str,20,5);
+
+	    JButton backBtn=p.addButton("Voltar",150,500);
+	    
+	    backBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    		  OpenNewPainel(AdotarMenu());
+	    	  } 
+	    	} );
+	    
+		animais.ChangeSize(new Dimension(300, 550));
+		animais.setLayout(new WrapLayout());
+		ListaAnimais busca_tipo;
+		ListaAnimais busca_nome;
+		ListaAnimais busca_local;
+		//busca por tipo
+		if(tipo!=0)
+			busca_tipo=listaAnimais.pesquisaPorTipo(tipo);
+		else
+			busca_tipo=listaAnimais;
+		ultimaBusca=busca_tipo;
+		if(!nome.equals("")) {
+			busca_nome=ultimaBusca.pesquisaPorNome(nome);
+			ultimaBusca=busca_nome;
+		}
+		
+		if(!local.equals("")) {
+			busca_local=ultimaBusca.pesquisaPorLocalizacao(local);
+			ultimaBusca=busca_local;
+		}
+		
+		int i=0;
+	    for (Animal animal : ultimaBusca.getAll()) {
+		    JButton perfilBtn=animais.addButtonFlow(animal.getNome(),300,50);
+		    perfilBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		OpenNewPainel(PerfilAnimal(animal,ExibePesquisa(tipo)));
+		    	} 
+		    } );
+		    i++;
+		    if(i>9)
+		    	break;
+	    }
+		scroll.setViewportView(animais);
+		return p;
+	}
+	
 	private Painel ExibePesquisa(int tipo) {
 
 		Painel p=new Painel("img/bg_solido.png");
@@ -340,12 +405,11 @@ public class Interface{
 	    		  OpenNewPainel(AdotarMenu());
 	    	  } 
 	    	} );
-
+	    
 		animais.ChangeSize(new Dimension(300, 550));
 		animais.setLayout(new WrapLayout());
-
 		int i=0;
-	    for (Animal animal : listaAnimais.getAll()) {
+	    for (Animal animal : ultimaBusca.getAll()) {
 		    JButton perfilBtn=animais.addButtonFlow(animal.getNome(),300,50);
 		    perfilBtn.addActionListener(new ActionListener() { 
 		    	public void actionPerformed(ActionEvent e) { 

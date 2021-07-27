@@ -43,10 +43,10 @@ import java.util.List;
 			num_gatos++;
 		}
 		
-		public void add_animal_cachorro(Cachorro cao) {
+		public void add_animal_cao(Cachorro cao) {
 			animais.add(cao);
 			num_animais++;
-			num_gatos++;
+			num_caes++;
 		}
 		
 		public int getNumAnimais() {
@@ -103,7 +103,7 @@ import java.util.List;
 				}
 			}
 			
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 			
 			return novaLista;
 		}
@@ -116,11 +116,11 @@ import java.util.List;
 			this.ordenaAnimaisPorLocalizacao();
 			
 			int i = 0;
-			while(animais.get(i).getLocalizacao().compareTo(Localizacao) < 0 && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getLocalizacao().compareTo(Localizacao) < 0) {
 				i++;
 			}
 			
-			while(animais.get(i).getLocalizacao().compareTo(Localizacao) == 0 && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getLocalizacao().compareTo(Localizacao) == 0) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -128,7 +128,7 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 			
 			return novaLista;
 		}
@@ -153,7 +153,7 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 						
 			return novaLista;
 		}
@@ -164,13 +164,14 @@ import java.util.List;
 			List<Animal> matchList = new ArrayList<Animal>();
 			
 			this.ordenaAnimaisPorNome();
-			
+			System.out.print(this.num_animais);
 			int i = 0;
-			while(animais.get(i).getNome().compareTo(Nome) < 0 && i < this.num_animais) {
+			
+			while(i < this.num_animais && animais.get(i).getNome().compareTo(Nome) < 0) {
 				i++;
 			}
 			
-			while(animais.get(i).getNome().compareTo(Nome) == 0 && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getNome().compareTo(Nome) == 0) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -178,7 +179,7 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 						
 			return novaLista;
 		}
@@ -203,7 +204,7 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 									
 			return novaLista;
 		}
@@ -211,7 +212,9 @@ import java.util.List;
 		public List<Animal> getAll(){
 			return animais;
 		}
-
+		public void SetLista(List<Animal> novaLista){
+			animais=novaLista;
+		}
 		public int getSize(){
 			return animais.size();
 		}
