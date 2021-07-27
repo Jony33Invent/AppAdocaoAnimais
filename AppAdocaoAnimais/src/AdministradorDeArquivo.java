@@ -56,6 +56,44 @@ public class AdministradorDeArquivo {
 		return (novoAnimal);
 	}
 
+	public void escreveContasNoArquivo(ListaContas ListaDeContas) throws IOException {
+		RandomAccessFile f = new RandomAccessFile("cadastros/animais", "rw");
+		f.setLength(0);
+		for(int i = 0; i < ListaDeContas.getNumContas(); i++) {
+			f.writeChars(ListaDeContas.pegaConta(i).toString());
+		}
+		f.close();
+	}
+	
+	public ListaContas leContasDoArquivo() throws IOException{
+		Conta novaConta;
+		ListaContas contas = new ListaContas();
+		
+		while((novaConta = leConta()) != null) {
+			contas.addConta(novaConta);
+		}
+		
+		return contas;
+	}
+	
+	public Conta leConta() throws IOException{
+		String st;
+		Conta novaConta;
+		
+		if((st = contaBr.readLine()) == null) return null;
+		else {
+			String[] num = st.split("|");
+			int key = Integer.valueOf(num[0]);
+			String nome = num[1];
+			String endereco = num[2];
+			String email = num[3];
+			String senha = num[4];
+			
+			novaConta = new Conta(key, nome, endereco, email, senha);
+		}
+		return (novaConta);
+	}
+	
 }
 
 //String[] num = s.split(" ");

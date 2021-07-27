@@ -10,6 +10,14 @@ public class ListaContas {
 		num_contas = 0;
 	}
 	
+	public int getNumContas() {
+		return num_contas;
+	}
+	
+	public Conta pegaConta(int i) {
+		return this.contas.get(i);
+	}
+	
 	public boolean contaExistente(String email) {
 		for(int i = 0; i < num_contas; i++) {
 			if(this.contas.get(i).getEmail().equals(email)) return true;
@@ -21,6 +29,7 @@ public class ListaContas {
 		Conta c;
 		for(int i = 0; i < num_contas; i++) {
 			c=this.contas.get(i);
+		
 			if(c instanceof ContaEmpresa && c.getEmail().equals(email)) return true;
 		}
 		
@@ -38,7 +47,7 @@ public class ListaContas {
 	public boolean addConta(String nome, String endereco, String email, String senha) {
 		if(this.contaExistente(email)) return false;
 		
-		Conta novaConta = new Conta(nome, endereco, email, senha);
+		Conta novaConta = new Conta(num_contas, nome, endereco, email, senha);
 		
 		this.contas.add(novaConta);
 		num_contas++;
@@ -48,7 +57,7 @@ public class ListaContas {
 	public boolean addPessoa(String nome, String endereco, String email, String senha) {
 		if(this.contaExistente(email)) return false;
 		
-		ContaPessoa novaConta = new ContaPessoa(nome, endereco, email, senha);
+		ContaPessoa novaConta = new ContaPessoa(num_contas,nome, endereco, email, senha);
 		
 		this.contas.add(novaConta);
 		num_contas++;
@@ -57,12 +66,18 @@ public class ListaContas {
 	public boolean addEmpresa(String nome, String endereco, String email, String senha) {
 		if(this.contaExistente(email)) return false;
 		
-		ContaEmpresa novaConta = new ContaEmpresa(nome, endereco, email, senha);
+		ContaEmpresa novaConta = new ContaEmpresa(num_contas,nome, endereco, email, senha);
 		
 		this.contas.add(novaConta);
 		num_contas++;
 		return true;
 	}
+	
+	public void addConta(Conta novaConta) {
+		this.contas.add(novaConta);
+		this.num_contas++;
+	}
+	
 	public boolean checkSenha(String email, String senha) {
 		if(!(this.contaExistente(email))) return false;
 		for(int i = 0; i < num_contas; i++) {
