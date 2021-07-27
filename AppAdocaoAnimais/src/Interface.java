@@ -124,7 +124,7 @@ public class Interface{
 	}
 	
 	private Painel PessoalMenu() {
-		Painel p=new Painel("img/bg_solido2.png");
+		Painel p=new Painel("img/bg_red_rect2.png");
 
 	    p.addLabelRed("O que deseja fazer?",80,100);
 
@@ -151,13 +151,13 @@ public class Interface{
 	}
 	
 	private Painel AdotarMenu() {
-		Painel p=new Painel("img/bg_solido2.png");
+		Painel p=new Painel("img/bg_red_rect_patas.png");
 
-	    p.addLabelRed("Qual bichinho deseja adotar?",35,100);
+	    p.addLabelWhite("Qual bichinho deseja adotar?",35,40);
 
-	    JButton caoBtn=p.addButton("Cão",100,170);
-	    JButton gatoBtn=p.addButton("Gato",100,240);
-	    JButton semPrefBtn=p.addButton("Sem preferência",100,310);
+	    JButton caoBtn=p.addButton("Cão",100,140);
+	    JButton gatoBtn=p.addButton("Gato",100,210);
+	    JButton semPrefBtn=p.addButton("Sem preferência",100,280);
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    caoBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
@@ -340,7 +340,7 @@ public class Interface{
 	}
 	
 	private Painel PainelPesquisar(int tipo) {
-		Painel p = new Painel("img/bg_solido2.png");
+		Painel p = new Painel("img/bg_patas_rect.png");
 		/* tipo
 		 *  1 -> cão
 		 *  2 -> gato
@@ -359,10 +359,10 @@ public class Interface{
 			break;
 		}
 				
-	    p.addLabelRed(str,35,100);
+	    p.addLabelWhite(str,35,100);
 
-	    JTextField nome = p.addTextFieldRed("Nome:", 130, 160);
-	    JTextField local = p.addTextFieldRed("Localização:", 130, 190);
+	    JTextField nome = p.addTextFieldWhite("Nome:", 130, 160);
+	    JTextField local = p.addTextFieldWhite("Localização:", 130, 190);
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    JButton searchBtn=p.addButton("Pesquisar",100,300);
 	    searchBtn.addActionListener(new ActionListener() { 
@@ -385,7 +385,7 @@ public class Interface{
 
 		Painel p=new Painel("img/bg_solido.png");
 		JScrollPane scroll=p.addScrollPane(-30,60);
-		Painel animais=new Painel("img/bg_solido2.png");
+		Painel animais=new Painel("img/bg_patas.png");
 	    String str="";
 		switch(tipo) {
 		case 1:
@@ -449,7 +449,7 @@ public class Interface{
 
 		Painel p=new Painel("img/bg_solido.png");
 		JScrollPane scroll=p.addScrollPane(-30,60);
-		Painel animais=new Painel("img/bg_solido2.png");
+		Painel animais=new Painel("img/bg_patas.png");
 	    String str="";
 		switch(tipo) {
 		case 1:
@@ -490,7 +490,7 @@ public class Interface{
 		return p;
 	}
 		
-		// Sessï¿½o Institucional
+	// Sessão institucional
 		private Painel PainelInstitucional() {
 			Painel p = new Painel("img/bg_solido.png");
 
@@ -594,7 +594,7 @@ public class Interface{
 	
 	public void ExibeTelaEntrada() {
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Painel p=AdotarMenu();
+		Painel p=PessoalMenu();
 
 		tela.add(p);
 		tela.pack();
