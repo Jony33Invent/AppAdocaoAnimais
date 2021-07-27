@@ -81,26 +81,36 @@ import java.util.List;
 			Collections.sort(animais, new SortByNome());
 		}
 		
-		public List<Animal> pesquisaPorTipo(int Tipo) {
+		public ListaAnimais pesquisaPorTipo(int Tipo) {
+			ListaAnimais novaLista = new ListaAnimais();
+			
 			List<Animal> matchList = new ArrayList<Animal>();
 			
 			this.ordenaAnimaisPorTipo();
 			
 			if(Tipo == 1) {
+				novaLista.num_caes = this.num_caes;
+				novaLista.num_animais = this.num_caes;
 				for(int i = 0; i < this.num_caes; i++) {
 					matchList.add(animais.get(i));
 				}
 			}
 			else if(Tipo == 2) {
+				novaLista.num_caes = this.num_gatos;
+				novaLista.num_animais = this.num_gatos;
 				for(int i = this.num_caes; i < this.num_animais; i++) {
 					matchList.add(animais.get(i));					
 				}
 			}
 			
-			return matchList;
+			novaLista.animais = matchList;
+			
+			return novaLista;
 		}
 		
-		public List<Animal> pesquisaPorLocalizacao(String Localizacao) {
+		public ListaAnimais pesquisaPorLocalizacao(String Localizacao) {
+			ListaAnimais novaLista = new ListaAnimais();
+			
 			List<Animal> matchList = new ArrayList<Animal>();
 			
 			this.ordenaAnimaisPorLocalizacao();
@@ -112,13 +122,20 @@ import java.util.List;
 			
 			while(animais.get(i).getLocalizacao().compareTo(Localizacao) == 0 && i < this.num_animais) {
 				matchList.add(animais.get(i));
+				novaLista.num_animais++;
+				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
+				else novaLista.num_gatos++;
 				i++;
 			}
+
+			novaLista.animais = matchList;
 			
-			return matchList;
+			return novaLista;
 		}
 		
-		public List<Animal> pesquisaPorIdade(int Idade) {
+		public ListaAnimais pesquisaPorIdade(int Idade) {
+			ListaAnimais novaLista = new ListaAnimais();
+			
 			List<Animal> matchList = new ArrayList<Animal>();
 			
 			this.ordenaAnimaisPorIdade();
@@ -130,13 +147,20 @@ import java.util.List;
 			
 			while(animais.get(i).getIdade() == Idade && i < this.num_animais) {
 				matchList.add(animais.get(i));
+				novaLista.num_animais++;
+				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
+				else novaLista.num_gatos++;
 				i++;
 			}
-			
-			return matchList;
+
+			novaLista.animais = matchList;
+						
+			return novaLista;
 		}
 		
-		public List<Animal> pesquisaPorNome(String Nome) {
+		public ListaAnimais pesquisaPorNome(String Nome) {
+			ListaAnimais novaLista = new ListaAnimais();
+			
 			List<Animal> matchList = new ArrayList<Animal>();
 			
 			this.ordenaAnimaisPorNome();
@@ -148,13 +172,20 @@ import java.util.List;
 			
 			while(animais.get(i).getNome().compareTo(Nome) == 0 && i < this.num_animais) {
 				matchList.add(animais.get(i));
+				novaLista.num_animais++;
+				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
+				else novaLista.num_gatos++;
 				i++;
 			}
-			
-			return matchList;
+
+			novaLista.animais = matchList;
+						
+			return novaLista;
 		}
 		
-		public List<Animal> pesquisaPorPorte(int Porte) {
+		public ListaAnimais pesquisaPorPorte(int Porte) {
+			ListaAnimais novaLista = new ListaAnimais();
+			
 			List<Animal> matchList = new ArrayList<Animal>();
 			
 			this.ordenaAnimaisPorPorte();
@@ -166,10 +197,15 @@ import java.util.List;
 			
 			while(animais.get(i).getPorte() == Porte && i < this.num_animais) {
 				matchList.add(animais.get(i));
+				novaLista.num_animais++;
+				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
+				else novaLista.num_gatos++;
 				i++;
 			}
-			
-			return matchList;
+
+			novaLista.animais = matchList;
+									
+			return novaLista;
 		}
 
 		public List<Animal> getAll(){
