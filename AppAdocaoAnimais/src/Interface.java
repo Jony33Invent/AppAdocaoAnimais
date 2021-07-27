@@ -155,7 +155,7 @@ public class Interface{
 
 	    p.addLabelRed("Qual bichinho deseja adotar?",35,100);
 
-	    JButton caoBtn=p.addButton("C�o",100,170);
+	    JButton caoBtn=p.addButton("Cão",100,170);
 	    JButton gatoBtn=p.addButton("Gato",100,240);
 	    JButton semPrefBtn=p.addButton("Sem prefer�ncia",100,310);
 	    JButton backBtn=p.addButton("Voltar",100,400);
@@ -187,17 +187,17 @@ public class Interface{
 	    p.addLabelRed("Cadastro", 35, 20);
 
 	    String tipos[] = { "Gato", "Cachorro"};
-	    String sexos[] = { "Macho", "Fem�a"};
+	    String sexos[] = { "Macho", "Fêmea"};
 	    
 	    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
 	    JButton backBtn = p.addButton("Voltar",160, 20);
-	    JTextField local = p.addTextFieldRed("Localiza��o:", 130, 170);
+	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
 	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
 	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
 	    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
 	    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
 	    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
-	    JTextArea descricao = p.addTextArea("Descri��o", 100, 310);
+	    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
 	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
 	    
 	    cadastrarBtn.addActionListener(new ActionListener() { 
@@ -248,13 +248,13 @@ public class Interface{
 	    p.addLabelWhite("Idade: "+a.getIdade(), 40, 130);
 	    p.addLabelWhite("Sexo: "+a.getSexo(), 40, 160);
 
-	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"N�o"), 40, 190);
+	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 40, 190);
 
-	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"N�o"), 40, 220);
+	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 40, 220);
 
-	    p.addLabelWhite("Localiza��o: "+a.getLocalizacao(), 40, 250);
+	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 40, 250);
 
-	    p.addLabelWhite("Descri��o: ", 40, 280);
+	    p.addLabelWhite("Descrição: ", 40, 280);
 	    String desc="<html>";
 	    String[] parts = a.getDescricao().split("\n");
 	    for(int i=0;i<parts.length;i++)
@@ -276,14 +276,14 @@ public class Interface{
 	private Painel PainelPesquisar(int tipo) {
 		Painel p = new Painel("img/bg_solido2.png");
 		/* tipo
-		 *  1 -> c�o
+		 *  1 -> cão
 		 *  2 -> gato
 		 *  0 -> ambos
 		 */
 		String str="";
 		switch(tipo) {
 			case 1:
-				str="Buscar por c�o";
+				str="Buscar por cão";
 			break;
 			case 2:
 				str="Buscar por gato";
@@ -296,7 +296,7 @@ public class Interface{
 	    p.addLabelRed(str,35,100);
 
 	    JTextField nome = p.addTextFieldRed("Nome:", 130, 160);
-	    JTextField local = p.addTextFieldRed("Localiza��o:", 130, 190);
+	    JTextField local = p.addTextFieldRed("Localização:", 130, 190);
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    JButton searchBtn=p.addButton("Pesquisar",100,300);
 	    searchBtn.addActionListener(new ActionListener() { 
@@ -323,7 +323,7 @@ public class Interface{
 	    String str="";
 		switch(tipo) {
 		case 1:
-			str="Resultados da busca por c�o";
+			str="Resultados da busca por cão";
 		break;
 		case 2:
 			str="Resultados da busca por gato";
@@ -387,7 +387,7 @@ public class Interface{
 	    String str="";
 		switch(tipo) {
 		case 1:
-			str="Resultados da busca por c�o";
+			str="Resultados da busca por cão";
 		break;
 		case 2:
 			str="Resultados da busca por gato";
