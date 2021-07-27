@@ -1,10 +1,8 @@
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,10 +14,12 @@ public class Interface{
 	
 	private JFrame tela;
 	private ListaAnimais listaAnimais;
+	private ListaAnimais listaCadastrado;
 	private ListaAnimais ultimaBusca;
 	public Interface() {
 		tela=new JFrame("PET Adoption - App");
 		listaAnimais=new ListaAnimais();
+		listaCadastrado=new ListaAnimais();
 		try {
 		     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fonts//SansitaOne.ttf")));
@@ -139,7 +139,7 @@ public class Interface{
 	    	} );
 	    cadastrarUmBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(CadastrarAnimal());
+	    	    OpenNewPainel(CadastroMenu());
 	    	  } 
 	    	} );
 	    backBtn.addActionListener(new ActionListener() { 
@@ -182,6 +182,47 @@ public class Interface{
 	    return p;
 	}
 	
+	private Painel CadastroMenu() {
+		Painel p=new Painel("img/bg_solido.png");
+
+		JScrollPane scroll=p.addScrollPane(-30,60);
+		Painel animais=new Painel("img/bg_solido2.png");
+	    p.addLabelWhite("Meus cadastros",20,5);
+
+	    JButton backBtn=p.addButton("Voltar",170,500);
+	    JButton cadastrarBtn=p.addButton("Adicionar novo",10,500);
+
+	    cadastrarBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(CadastrarAnimal());
+	    	  } 
+	    	} );
+	    backBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    		  OpenNewPainel(PessoalMenu());
+	    	  } 
+	    	} );
+	    
+		animais.ChangeSize(new Dimension(300, 550));
+		animais.setLayout(new WrapLayout());
+		
+		int i=0;
+		
+	    for (Animal animal : listaCadastrado.getAll()) {
+		    JButton perfilBtn=animais.addButtonFlow(animal.getNome(),300,50);
+		    perfilBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		OpenNewPainel(PerfilAnimal(animal,CadastroMenu()));
+		    	} 
+		    } );
+		    i++;
+		    if(i>9)
+		    	break;
+	    }
+		scroll.setViewportView(animais);
+		return p;
+	}
+	
 	private Painel CadastrarAnimal() {
 		Painel p = new Painel("img/bg_solido2.png");
 	    p.addLabelRed("Cadastro", 35, 20);
@@ -221,11 +262,15 @@ public class Interface{
 			    		if(tipo_animal == "Gato") {
 			    			Gato gato = new Gato(nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
 			    			listaAnimais.add_animal_gato(gato);
+			    			listaCadastrado.add_animal_gato(gato);
+
 			    			OpenNewPainel(PerfilAnimal(gato,CadastrarAnimal()));
 						}
 			    		else if(tipo_animal == "Cachorro") {
 			    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
 			    			listaAnimais.add_animal_cao(cachorro);
+			    			listaCadastrado.add_animal_cao(cachorro);
+			    			
 			    			OpenNewPainel(PerfilAnimal(cachorro,CadastrarAnimal()));
 						}
 	    	    	}else {
@@ -241,7 +286,7 @@ public class Interface{
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
-	    		OpenNewPainel(PessoalMenu());
+	    		OpenNewPainel(CadastroMenu());
 	    	} 
 	    } );
 	    
