@@ -215,16 +215,21 @@ public class Interface{
 	    cadastrarBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) {
 	    		if(tipo_animal == "Gato") {
-	    			Gato animal = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
-	    		}
+	    			Gato gato = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    		
+	    			OpenNewPainel(PerfilAnimal(gato));
+				}
 	    		else if(tipo_animal == "Cachorro") {
-	    			Cachorro animal = new Cachorro(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
-	    		}
+	    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    		
+	    			OpenNewPainel(PerfilAnimal(cachorro));
+				}
 	    		else {
 		    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
 		    		    		descricao_animal, sexo_animal);
+								
+	    			OpenNewPainel(PerfilAnimal(animal));
 	    		}
-	    		OpenNewPainel(PerfilAnimal(animal));
 	    	}
 	    } );
 	    
@@ -240,11 +245,11 @@ public class Interface{
 	private Painel PerfilAnimal(Animal a) {
 		Painel p=new Painel("img/bg_solido.png");
 		
-	    p.addLabelWhite("Nome: ", 100, 100);
+	    p.addLabelWhite("Nome: "+a.getNome(), 100, 100);
 
-	    p.addLabelWhite("Idade: ", 100, 130);
+	    p.addLabelWhite("Idade: "+a.getIdade(), 100, 130);
 
-	    p.addLabelWhite("Castrado: ", 100, 160);
+	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 100, 160);
 
 	    p.addLabelWhite("Localização: ", 100, 190);
 
