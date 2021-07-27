@@ -16,6 +16,10 @@ import java.util.List;
 			num_gatos = 0;
 		}
 		
+		public Animal pegaAnimal(int i) {
+			return this.animais.get(i);
+		}
+		
 		/**/
 		public void add_animal_cao(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
 			Animal cao = new Cachorro(nom, id, porte, vac, cas, loc, des,sexo);
