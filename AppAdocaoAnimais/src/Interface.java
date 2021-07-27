@@ -186,33 +186,34 @@ public class Interface{
 	    String sexos[] = { "Macho", "Femêa"};
 	    
 	    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
-	    String nome_animal = nome.getText();
 	    
 	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
-	    String local_animal = local.getText();
 	    
 	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
-	    String tipo_animal = (String) tipo.getSelectedItem();
-	    
+	  
 	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
-	    String sexo_animal = (String) sexo.getSelectedItem();
 	    
 	    JButton backBtn = p.addButton("Voltar",160, 20);
 	    
 	    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
-	    int idade_animal = (int) idade.getValue();
 	    
 	    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
-	    boolean vacina_animal = vacinado.isSelected();
 	    
 	    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
-	    boolean castrado_animal = castrado.isSelected();
 	    
 	    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
-	    String descricao_animal = descricao.getText();
 	    
 	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
 	    cadastrarBtn.addActionListener(new ActionListener() { 
+	    	String nome_animal = nome.getText();
+	    	String local_animal = local.getText();
+	    	String tipo_animal = (String) tipo.getSelectedItem();
+		    String sexo_animal = (String) sexo.getSelectedItem();
+		    int idade_animal = (int) idade.getValue();
+		    String descricao_animal = descricao.getText();
+		    boolean castrado_animal = castrado.isSelected();
+		    boolean vacina_animal = vacinado.isSelected();
+	 	    
 	    	public void actionPerformed(ActionEvent e) {
 	    		if(tipo_animal == "Gato") {
 	    			Gato gato = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
