@@ -205,6 +205,7 @@ public class Interface{
 	    	    String local_animal = local.getText();
 	    	    String tipo_animal = (String) tipo.getSelectedItem();
 	    	    String sexo_animal = (String) sexo.getSelectedItem();
+	    	    int porte_animal=0;
 	    	    int idade_animal = (int) idade.getValue();
 	    	    boolean vacina_animal = vacinado.isSelected();
 	    	    boolean castrado_animal = castrado.isSelected();
@@ -214,17 +215,17 @@ public class Interface{
 	    		
 	    		
 	    		if(tipo_animal == "Gato") {
-	    			Gato gato = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    			Gato gato = new Gato(nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
 	    		
 	    			OpenNewPainel(PerfilAnimal(gato));
 				}
 	    		else if(tipo_animal == "Cachorro") {
-	    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
 	    		
 	    			OpenNewPainel(PerfilAnimal(cachorro));
 				}
 	    		else {
-		    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
+		    		Animal animal = new Animal(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal,
 		    		    		descricao_animal, sexo_animal);
 								
 	    			OpenNewPainel(PerfilAnimal(animal));
