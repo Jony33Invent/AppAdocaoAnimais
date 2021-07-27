@@ -9,6 +9,17 @@ public class Animal {
 	private String sexo;
 
 	// Construtores
+
+	public Animal(String nom, int id, boolean vac, boolean cas, String loc, String des) {
+		setNome(nom);
+		setIdade(id);
+		setVacinado(vac);
+		setCastrado(cas);
+		setLocalizacao(loc);
+		setDescricao(des);
+		setSexo(sexo);
+	}
+	
 	public Animal(String nom, int id, boolean vac, boolean cas, String loc, String des, String sexo) {
 		setNome(nom);
 		setIdade(id);

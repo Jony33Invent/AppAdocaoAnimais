@@ -17,16 +17,16 @@ import java.util.List;
 		}
 		
 		/**/
-		public void add_animal_cao(String nom,int id, boolean vac, boolean cas, String loc, String des) {
-			Animal cao = new Cachorro(nom, id, vac, cas, loc, des);
+		public void add_animal_cao(String nom,int id, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal cao = new Cachorro(nom, id, vac, cas, loc, des,sexo);
 			animais.add(cao);
 			num_animais++;
 			num_caes++;
 		}
 		
 		/**/
-		public void add_animal_gato(String nom,int id, boolean vac, boolean cas, String loc, String des) {
-			Animal gato = new Gato(nom, id, vac, cas, loc, des);
+		public void add_animal_gato(String nom,int id, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal gato = new Gato(nom, id, vac, cas, loc, des,sexo);
 			animais.add(gato);
 			num_animais++;
 			num_gatos++;
