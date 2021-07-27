@@ -141,11 +141,11 @@ import java.util.List;
 			this.ordenaAnimaisPorIdade();
 			
 			int i = 0;
-			while(animais.get(i).getIdade() < Idade && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getIdade() < Idade) {
 				i++;
 			}
 			
-			while(animais.get(i).getIdade() == Idade && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getIdade() == Idade) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -192,11 +192,11 @@ import java.util.List;
 			this.ordenaAnimaisPorPorte();
 			
 			int i = 0;
-			while(animais.get(i).getPorte() < Porte && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getPorte() < Porte) {
 				i++;
 			}
 			
-			while(animais.get(i).getPorte() == Porte && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getPorte() == Porte) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -208,21 +208,17 @@ import java.util.List;
 									
 			return novaLista;
 		}
-<<<<<<< HEAD
-		
-		
-=======
-
 		public List<Animal> getAll(){
 			return animais;
 		}
+		
 		public void SetLista(List<Animal> novaLista){
 			animais=novaLista;
 		}
+		
 		public int getSize(){
 			return animais.size();
 		}
->>>>>>> 24d25668d7798edd06c3a9a97465a518443f145a
 	}
 	class SortByTipo implements Comparator<Animal>
 	{
