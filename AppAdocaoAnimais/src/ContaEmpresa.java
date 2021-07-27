@@ -2,8 +2,8 @@
 public class ContaEmpresa extends Conta{
 	private int CNPJ;
 	
-	public ContaEmpresa(String nome, String endereco, int cNPJ) {
-		super(nome, endereco);
+	public ContaEmpresa(String email, String senha, String nome, String endereco, int cNPJ) {
+		super(email, senha, nome, endereco);
 		setCNPJ(cNPJ);
 	}
 

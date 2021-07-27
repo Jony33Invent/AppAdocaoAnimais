@@ -2,8 +2,8 @@
 public class ContaPessoa extends Conta{
 	private int CPF;
 
-	public ContaPessoa(String nome, String endereco, int cPF) {
-		super(nome, endereco);
+	public ContaPessoa(String email, String senha, String nome, String endereco, int cPF) {
+		super(email, senha, nome, endereco);
 		setCPF(cPF);
 	}
 	

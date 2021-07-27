@@ -191,6 +191,7 @@ import java.util.List;
 			return novaLista;
 		}
 		
+		
 	}
 	
 	class SortByTipo implements Comparator<Animal>
