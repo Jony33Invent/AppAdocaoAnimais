@@ -186,35 +186,31 @@ public class Interface{
 	    String sexos[] = { "Macho", "Femêa"};
 	    
 	    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
-	    
-	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
-	    
-	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
-	  
-	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
-	    
 	    JButton backBtn = p.addButton("Voltar",160, 20);
-	    
+	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
+	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
+	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
 	    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
-	    
 	    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
-	    
 	    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
-	    
 	    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
-	    
 	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
+	    
 	    cadastrarBtn.addActionListener(new ActionListener() { 
-	    	String nome_animal = nome.getText();
-	    	String local_animal = local.getText();
-	    	String tipo_animal = (String) tipo.getSelectedItem();
-		    String sexo_animal = (String) sexo.getSelectedItem();
-		    int idade_animal = (int) idade.getValue();
-		    String descricao_animal = descricao.getText();
-		    boolean castrado_animal = castrado.isSelected();
-		    boolean vacina_animal = vacinado.isSelected();
-	 	    
 	    	public void actionPerformed(ActionEvent e) {
+
+	    	    String nome_animal = nome.getText();
+	    	    String local_animal = local.getText();
+	    	    String tipo_animal = (String) tipo.getSelectedItem();
+	    	    String sexo_animal = (String) sexo.getSelectedItem();
+	    	    int idade_animal = (int) idade.getValue();
+	    	    boolean vacina_animal = vacinado.isSelected();
+	    	    boolean castrado_animal = castrado.isSelected();
+	    	    String descricao_animal = descricao.getText();
+	    	    
+	    	    
+	    		
+	    		
 	    		if(tipo_animal == "Gato") {
 	    			Gato gato = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
 	    		
@@ -236,7 +232,7 @@ public class Interface{
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
-	    		OpenNewPainel(PessoalMenu());
+	    		OpenNewPainel(CadastrarAnimal());
 	    	} 
 	    } );
 	    
@@ -252,9 +248,11 @@ public class Interface{
 
 	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 100, 160);
 
-	    p.addLabelWhite("Localização: ", 100, 190);
+	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 100, 190);
 
-	    p.addLabelWhite("Descrição: ", 100, 220);
+	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 100, 220);
+
+	    p.addLabelWhite("Descrição: "+a.getDescricao(), 100, 250);
 	    
 	    JButton backBtn = p.addButton("Voltar", 100, 400);
 	    
