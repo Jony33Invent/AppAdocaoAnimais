@@ -50,7 +50,7 @@ public class Interface{
 	}
 	
 	
-	// Sessão Pessoal
+	// Sessï¿½o Pessoal
 	private Painel PainelPessoal() {
 		Painel p=new Painel("img/bg_solido.png");
 
@@ -155,9 +155,9 @@ public class Interface{
 
 	    p.addLabelRed("Qual bichinho deseja adotar?",35,100);
 
-	    JButton caoBtn=p.addButton("Cão",100,170);
+	    JButton caoBtn=p.addButton("Cï¿½o",100,170);
 	    JButton gatoBtn=p.addButton("Gato",100,240);
-	    JButton semPrefBtn=p.addButton("Sem preferência",100,310);
+	    JButton semPrefBtn=p.addButton("Sem preferï¿½ncia",100,310);
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    caoBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
@@ -187,17 +187,17 @@ public class Interface{
 	    p.addLabelRed("Cadastro", 35, 20);
 
 	    String tipos[] = { "Gato", "Cachorro"};
-	    String sexos[] = { "Macho", "Femêa"};
+	    String sexos[] = { "Macho", "Femï¿½a"};
 	    
 	    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
 	    JButton backBtn = p.addButton("Voltar",160, 20);
-	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
+	    JTextField local = p.addTextFieldRed("Localizaï¿½ï¿½o:", 130, 170);
 	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
 	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
 	    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
 	    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
 	    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
-	    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
+	    JTextArea descricao = p.addTextArea("Descriï¿½ï¿½o", 100, 310);
 	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
 	    
 	    cadastrarBtn.addActionListener(new ActionListener() { 
@@ -248,13 +248,13 @@ public class Interface{
 	    p.addLabelWhite("Idade: "+a.getIdade(), 40, 130);
 	    p.addLabelWhite("Sexo: "+a.getSexo(), 40, 160);
 
-	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 40, 190);
+	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Nï¿½o"), 40, 190);
 
-	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 40, 220);
+	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Nï¿½o"), 40, 220);
 
-	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 40, 250);
+	    p.addLabelWhite("Localizaï¿½ï¿½o: "+a.getLocalizacao(), 40, 250);
 
-	    p.addLabelWhite("Descrição: ", 40, 280);
+	    p.addLabelWhite("Descriï¿½ï¿½o: ", 40, 280);
 	    String desc="<html>";
 	    String[] parts = a.getDescricao().split("\n");
 	    for(int i=0;i<parts.length;i++)
@@ -276,14 +276,14 @@ public class Interface{
 	private Painel PainelPesquisar(int tipo) {
 		Painel p = new Painel("img/bg_solido2.png");
 		/* tipo
-		 *  1 -> cão
+		 *  1 -> cï¿½o
 		 *  2 -> gato
 		 *  0 -> ambos
 		 */
 		String str="";
 		switch(tipo) {
 			case 1:
-				str="Buscar por cão";
+				str="Buscar por cï¿½o";
 			break;
 			case 2:
 				str="Buscar por gato";
@@ -296,7 +296,7 @@ public class Interface{
 	    p.addLabelRed(str,35,100);
 
 	    JTextField nome = p.addTextFieldRed("Nome:", 130, 160);
-	    JTextField local = p.addTextFieldRed("Localização:", 130, 190);
+	    JTextField local = p.addTextFieldRed("Localizaï¿½ï¿½o:", 130, 190);
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    JButton searchBtn=p.addButton("Pesquisar",100,300);
 	    searchBtn.addActionListener(new ActionListener() { 
@@ -323,7 +323,7 @@ public class Interface{
 	    String str="";
 		switch(tipo) {
 		case 1:
-			str="Resultados da busca por cão";
+			str="Resultados da busca por cï¿½o";
 		break;
 		case 2:
 			str="Resultados da busca por gato";
@@ -387,7 +387,7 @@ public class Interface{
 	    String str="";
 		switch(tipo) {
 		case 1:
-			str="Resultados da busca por cão";
+			str="Resultados da busca por cï¿½o";
 		break;
 		case 2:
 			str="Resultados da busca por gato";
@@ -423,26 +423,108 @@ public class Interface{
 		scroll.setViewportView(animais);
 		return p;
 	}
-	// Sessão Institucional
-	private Painel PainelInstitucional() {
-		Painel p=new Painel("img/bg_solido.png");
+		
+		// Sessï¿½o Institucional
+		private Painel PainelInstitucional() {
+			Painel p = new Painel("img/bg_solido.png");
 
-	    tela.setLayout(new GridBagLayout());
-	    p.addLabelRed("Conta Institucional",85,100);
+		    tela.setLayout(new GridBagLayout());
+		    p.addLabelRed("Conta Institucional",85,100);
 
-	    JButton loginBtn=p.addButton("Login",100,170);
-	    JButton cadastroBtn=p.addButton("Cadastro",100,240);
-	    JButton backBtn=p.addButton("Voltar",100,400);
-	    
-	    backBtn.addActionListener(new ActionListener() { 
-	    	  public void actionPerformed(ActionEvent e) { 
-	    		  OpenNewPainel(PainelEntrada());
-	    	  } 
-	    	} );
-	    return p;
-	}
+		    JButton loginBtn=p.addButton("Login",100,170);
+		    JButton cadastroBtn=p.addButton("Cadastro",100,240);
+		    JButton backBtn=p.addButton("Voltar",100,400);
+		    
+		    loginBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(LoginInstitucional());
+		    	  } 
+		    	} );
+		    cadastroBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(CadastroInstitucional());
+		    	  } 
+		    	} );
+		    backBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    		  OpenNewPainel(PainelEntrada());
+		    	  } 
+		    	} );
+		    
+		    return p;
+		}
+		
+		private Painel InstitucionalMenu() {
+			Painel p=new Painel("img/bg_solido2.png");
 
-	
+		    p.addLabelRed("O que deseja fazer?",80,100);
+
+		    JButton cadastrarBtn = p.addButton("Cadastrar animais",75,170,200);
+		    JButton atualizarBtn = p.addButton("Atualizar informaï¿½ï¿½es",75,240,200);
+		    JButton backBtn = p.addButton("Voltar",100,400);
+		    
+		    cadastrarBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(CadastrarAnimal());
+		    	  } 
+		    	} );
+		    atualizarBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(CadastrarAnimal());
+		    	  } 
+		    	} );
+		    backBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(PainelInstitucional());
+		    	  } 
+		    	} );
+		    return p;
+		}
+		
+		private Painel LoginInstitucional() {
+			Painel p = new Painel("img/bg_solido.png");
+
+		    p.addLabelWhite("Login",100,100);
+		    JTextField email = p.addTextField("E-mail:", 100, 170);
+		    JPasswordField senha = p.addPasswordField("Senha:", 100, 220);
+		    
+		    JButton enterAppBtn=p.addButton("Entrar",100,280);
+		    JButton backBtn=p.addButton("Voltar",100,400);
+		    enterAppBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		OpenNewPainel(InstitucionalMenu());
+		    	} 
+		    } );
+		    backBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		OpenNewPainel(PainelInstitucional());
+		    	} 
+		    } );
+		    return p;
+		}
+		
+		private Painel CadastroInstitucional() {
+			Painel p=new Painel("img/bg_solido.png");
+
+		    p.addLabelWhite("Cadastro",100,100);
+		    JTextField email=p.addTextField("E-mail:",100, 170);
+		    JPasswordField senha= p.addPasswordField("Senha:",100, 220);
+
+		    JPasswordField confSenha= p.addPasswordField("Conf. Senha:",100, 260);
+		    JButton enterAppBtn=p.addButton("Cadastrar",100,320);
+		    JButton backBtn=p.addButton("Voltar",100,400);
+		    enterAppBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(InstitucionalMenu());
+		    	  } 
+		    	} );
+		    backBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(PainelInstitucional());
+		    	  } 
+		    	} );
+		    return p;
+		}
 	
 	public void ExibeTelaEntrada() {
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
