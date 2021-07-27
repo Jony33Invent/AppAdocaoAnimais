@@ -23,13 +23,30 @@ import java.util.List;
 			num_animais++;
 			num_caes++;
 		}
-		
+		public void add_animal_nome(String nom) {
+			Animal cao = new Cachorro(nom, 0, 0, true, true, "", "","Macho");
+			animais.add(cao);
+			num_animais++;
+			num_caes++;
+		}
 		/**/
 		public void add_animal_gato(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
 			Animal gato = new Gato(nom, id, porte, vac, cas, loc, des, sexo);
 			animais.add(gato);
 			num_animais++;
 			num_gatos++;
+		}
+		
+		public void add_animal_gato(Gato gato) {
+			animais.add(gato);
+			num_animais++;
+			num_gatos++;
+		}
+		
+		public void add_animal_cao(Cachorro cao) {
+			animais.add(cao);
+			num_animais++;
+			num_caes++;
 		}
 		
 		public int getNumAnimais() {
@@ -86,7 +103,7 @@ import java.util.List;
 				}
 			}
 			
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 			
 			return novaLista;
 		}
@@ -99,11 +116,11 @@ import java.util.List;
 			this.ordenaAnimaisPorLocalizacao();
 			
 			int i = 0;
-			while(animais.get(i).getLocalizacao().compareTo(Localizacao) < 0 && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getLocalizacao().compareTo(Localizacao) < 0) {
 				i++;
 			}
 			
-			while(animais.get(i).getLocalizacao().compareTo(Localizacao) == 0 && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getLocalizacao().compareTo(Localizacao) == 0) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -111,7 +128,7 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 			
 			return novaLista;
 		}
@@ -136,7 +153,7 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 						
 			return novaLista;
 		}
@@ -147,13 +164,14 @@ import java.util.List;
 			List<Animal> matchList = new ArrayList<Animal>();
 			
 			this.ordenaAnimaisPorNome();
-			
+			System.out.print(this.num_animais);
 			int i = 0;
-			while(animais.get(i).getNome().compareTo(Nome) < 0 && i < this.num_animais) {
+			
+			while(i < this.num_animais && animais.get(i).getNome().compareTo(Nome) < 0) {
 				i++;
 			}
 			
-			while(animais.get(i).getNome().compareTo(Nome) == 0 && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getNome().compareTo(Nome) == 0) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -161,7 +179,7 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 						
 			return novaLista;
 		}
@@ -186,14 +204,26 @@ import java.util.List;
 				i++;
 			}
 
-			novaLista.animais = matchList;
+			novaLista.SetLista(matchList);
 									
 			return novaLista;
 		}
+<<<<<<< HEAD
 		
 		
+=======
+
+		public List<Animal> getAll(){
+			return animais;
+		}
+		public void SetLista(List<Animal> novaLista){
+			animais=novaLista;
+		}
+		public int getSize(){
+			return animais.size();
+		}
+>>>>>>> 24d25668d7798edd06c3a9a97465a518443f145a
 	}
-	
 	class SortByTipo implements Comparator<Animal>
 	{
 	    public int compare(Animal a, Animal b)
