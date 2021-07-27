@@ -17,16 +17,16 @@ import java.util.List;
 		}
 		
 		/**/
-		public void add_animal_cao(String nom,int id, boolean vac, boolean cas, String loc, String des,String sexo) {
-			Animal cao = new Cachorro(nom, id, vac, cas, loc, des,sexo);
+		public void add_animal_cao(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal cao = new Cachorro(nom, id, porte, vac, cas, loc, des,sexo);
 			animais.add(cao);
 			num_animais++;
 			num_caes++;
 		}
 		
 		/**/
-		public void add_animal_gato(String nom,int id, boolean vac, boolean cas, String loc, String des,String sexo) {
-			Animal gato = new Gato(nom, id, vac, cas, loc, des,sexo);
+		public void add_animal_gato(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal gato = new Gato(nom, id, porte, vac, cas, loc, des, sexo);
 			animais.add(gato);
 			num_animais++;
 			num_gatos++;
@@ -54,6 +54,10 @@ import java.util.List;
 		
 		public void ordenaAnimaisPorIdade() {
 			Collections.sort(animais, new SortByIdade());
+		}
+		
+		public void ordenaAnimaisPorPorte() {
+			Collections.sort(animais, new SortByPorte());
 		}
 		
 		public void ordenaAnimaisPorNome() {
@@ -133,6 +137,24 @@ import java.util.List;
 			return matchList;
 		}
 		
+		public List<Animal> pesquisaPorPorte(int Porte) {
+			List<Animal> matchList = new ArrayList<Animal>();
+			
+			this.ordenaAnimaisPorPorte();
+			
+			int i = 0;
+			while(animais.get(i).getPorte() < Porte && i < this.num_animais) {
+				i++;
+			}
+			
+			while(animais.get(i).getPorte() == Porte && i < this.num_animais) {
+				matchList.add(animais.get(i));
+				i++;
+			}
+			
+			return matchList;
+		}
+		
 	}
 	
 	class SortByTipo implements Comparator<Animal>
@@ -157,6 +179,14 @@ import java.util.List;
 	    public int compare(Animal a, Animal b)
 	    {
 	    	return a.getIdade() - b.getIdade();
+	    }
+	}
+	
+	class SortByPorte implements Comparator<Animal>
+	{
+	    public int compare(Animal a, Animal b)
+	    {
+	    	return a.getPorte() - b.getPorte();
 	    }
 	}
 	
