@@ -157,7 +157,7 @@ public class Interface{
 
 	    JButton caoBtn=p.addButton("Cão",100,170);
 	    JButton gatoBtn=p.addButton("Gato",100,240);
-	    JButton semPrefBtn=p.addButton("Sem prefer�ncia",100,310);
+	    JButton semPrefBtn=p.addButton("Sem preferência",100,310);
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    caoBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
@@ -240,19 +240,32 @@ public class Interface{
 	    return p;
 	}
 	
-	private Painel PerfilAnimal(Animal a,Painel pAnterior) {
+	private Painel PerfilAnimal(Animal a, Painel pAnterior) {
 		Painel p=new Painel("img/bg_solido.png");
 		
-	    p.addLabelWhite("Nome: "+a.getNome(), 40, 100);
+		if(a.getNome() != null)
+			p.addLabelWhite("Nome: "+a.getNome(), 40, 100);
+		else
+			p.addLabelWhite("Nome: desconhecido", 40, 100);
 
-	    p.addLabelWhite("Idade: "+a.getIdade(), 40, 130);
-	    p.addLabelWhite("Sexo: "+a.getSexo(), 40, 160);
+		if(a.getIdade() != -1)
+			p.addLabelWhite("Idade: "+a.getIdade(), 40, 130);
+		else
+			p.addLabelWhite("Idade: desconhecida", 40, 130);
+	    
+		if(a.getSexo() != null)
+			p.addLabelWhite("Sexo: "+a.getSexo(), 40, 160);
+		else
+			p.addLabelWhite("Sexo: desconhecido", 40, 160);
 
 	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 40, 190);
 
 	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 40, 220);
 
-	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 40, 250);
+	    if(a.getLocalizacao() != null)
+	    	p.addLabelWhite("Localização: "+a.getLocalizacao(), 40, 250);
+	    else
+	    	p.addLabelWhite("Localização: desconhecida", 40, 250);
 
 	    p.addLabelWhite("Descrição: ", 40, 280);
 	    String desc="<html>";
