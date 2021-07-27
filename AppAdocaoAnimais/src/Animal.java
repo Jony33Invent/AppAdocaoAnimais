@@ -2,6 +2,7 @@
 public class Animal {
 	private String nome;
 	private int idade;
+	private int porte;
 	private boolean vacinado;
 	private boolean castrado;
 	private String localizacao;
@@ -10,19 +11,10 @@ public class Animal {
 
 	// Construtores
 
-	public Animal(String nom, int id, boolean vac, boolean cas, String loc, String des) {
+	public Animal(String nom, int id, int porte, boolean vac, boolean cas, String loc, String des, String sexo) {
 		setNome(nom);
 		setIdade(id);
-		setVacinado(vac);
-		setCastrado(cas);
-		setLocalizacao(loc);
-		setDescricao(des);
-		setSexo(sexo);
-	}
-	
-	public Animal(String nom, int id, boolean vac, boolean cas, String loc, String des, String sexo) {
-		setNome(nom);
-		setIdade(id);
+		setPorte(porte);
 		setVacinado(vac);
 		setCastrado(cas);
 		setLocalizacao(loc);
@@ -58,6 +50,14 @@ public class Animal {
 
 	public void setIdade(int idade) {
 		this.idade = idade;
+	}
+	
+	public int getPorte() {
+		return porte;
+	}
+
+	public void setPorte(int porte) {
+		this.porte = porte;
 	}
 
 	public boolean isVacinado() {
