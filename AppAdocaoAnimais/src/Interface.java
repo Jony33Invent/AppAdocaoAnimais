@@ -179,32 +179,68 @@ public class Interface{
 	}
 	
 	private Painel CadastrarAnimal() {
-		Painel p=new Painel("img/bg_solido2.png");
-	    p.addLabelRed("Cadastro",35,20);
+		Painel p = new Painel("img/bg_solido2.png");
+	    p.addLabelRed("Cadastro", 35, 20);
 
 	    String tipos[] = { "Gato", "Cachorro"};
 	    String sexos[] = { "Macho", "Femêa"};
-	    JTextField nome=p.addTextFieldRed("Nome:",130, 140);
-	    JTextField local=p.addTextFieldRed("Localização:",130, 170);
-	    JComboBox<String> tipo=p.addComboBox("Tipo:",130, 200,tipos);
-	    JComboBox<String> sexo=p.addComboBox("Sexo:",130, 230,sexos);
-	    JButton backBtn=p.addButton("Voltar",160,20);
-	    JSpinner idade=p.addNumericInput("Idade:", 130, 260);
-	    JCheckBox vacinado=p.addCheckBox("Vacinado", 200, 260);
-	    JCheckBox castrado=p.addCheckBox("Castrado", 200, 290);
-	    JTextArea descricao=p.addTextArea("Descrição", 100, 310);
 	    
-	    JButton cadastrarBtn=p.addButton("Cadastrar",160,500);
+	    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
+	    String nome_animal = nome.getText();
+	    
+	    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
+	    String local_animal = local.getText();
+	    
+	    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
+	    String tipo_animal = (String) tipo.getSelectedItem();
+	    
+	    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
+	    String sexo_animal = (String) sexo.getSelectedItem();
+	    
+	    JButton backBtn = p.addButton("Voltar",160, 20);
+	    
+	    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
+	    int idade_animal = (int) idade.getValue();
+	    
+	    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
+	    boolean vacina_animal;
+	    if(vacinado.getSelectedObjects()==null)
+	    	vacina_animal = false;
+	    else
+	    	vacina_animal = true;
+	    
+	    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
+	    boolean castrado_animal;
+	    if(vacinado.getSelectedObjects()==null)
+	    	castrado_animal = false;
+	    else
+	    	castrado_animal = true;
+	    
+	    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
+	    String descricao_animal = descricao.getText();
+	    
+	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
 	    cadastrarBtn.addActionListener(new ActionListener() { 
-	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(PerfilAnimal());
-	    	  } 
-	    	} );
+	    	public void actionPerformed(ActionEvent e) { 
+	    		OpenNewPainel(PerfilAnimal());
+	    	} 
+	    } );
+	    
+	    if(tipo_animal == "Gato")
+	    	Gato gato = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
+		    		descricao_animal);
+	    if else(tipo_animal == "Cachorro")
+	    	Cachorro cachorro = new Cachorro(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
+		    		descricao_animal);
+	    else
+		    Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
+		    		descricao_animal);
+	    
 	    backBtn.addActionListener(new ActionListener() { 
-	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(PessoalMenu());
-	    	  } 
-	    	} );
+	    	public void actionPerformed(ActionEvent e) { 
+	    		OpenNewPainel(PessoalMenu());
+	    	} 
+	    } );
 	    
 	    return p;
 	}
@@ -231,8 +267,9 @@ public class Interface{
 	    	} );
 		return p;
 	}
+	
 	private Painel PainelPesquisar(int tipo) {
-		Painel p=new Painel("img/bg_solido2.png");
+		Painel p = new Painel("img/bg_solido2.png");
 		
 		/* tipo
 		 *  0 -> cão
