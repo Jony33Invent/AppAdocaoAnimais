@@ -242,19 +242,25 @@ public class Interface{
 	private Painel PerfilAnimal(Animal a) {
 		Painel p=new Painel("img/bg_solido.png");
 		
-	    p.addLabelWhite("Nome: "+a.getNome(), 100, 100);
+	    p.addLabelWhite("Nome: "+a.getNome(), 40, 100);
 
-	    p.addLabelWhite("Idade: "+a.getIdade(), 100, 130);
-	    p.addLabelWhite("Sexo: "+a.getSexo(), 100, 160);
+	    p.addLabelWhite("Idade: "+a.getIdade(), 40, 130);
+	    p.addLabelWhite("Sexo: "+a.getSexo(), 40, 160);
 
-	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 100, 190);
+	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 40, 190);
 
-	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 100, 220);
+	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 40, 220);
 
-	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 100, 250);
+	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 40, 250);
 
-	    p.addLabelWhite("Descrição: ", 100, 280);
-	    p.addLabelWhite(a.getDescricao(), 100, 300);
+	    p.addLabelWhite("Descrição: ", 40, 280);
+	    String desc="<html>";
+	    String[] parts = a.getDescricao().split("\n");
+	    for(int i=0;i<parts.length;i++)
+	    	desc+=(parts[i]+"<br/>");
+	    desc+="</html>";
+	    
+	    p.addLabelWhite(desc, 40, 320,13);
 	    JButton backBtn = p.addButton("Voltar", 100, 400);
 	    
 	    backBtn.addActionListener(new ActionListener() { 
