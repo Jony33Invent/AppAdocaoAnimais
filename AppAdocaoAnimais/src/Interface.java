@@ -222,8 +222,16 @@ public class Interface{
 	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
 	    cadastrarBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) {
-	    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
-	    		    		descricao_animal);
+	    		if(tipo_animal == "Gato") {
+	    			Gato animal = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    		}
+	    		else if(tipo_animal == "Cachorro") {
+	    			Cachorro animal = new Cachorro(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+	    		}
+	    		else {
+		    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
+		    		    		descricao_animal, sexo_animal);	
+	    		}
 	    		OpenNewPainel(PerfilAnimal(animal));
 	    	} 
 	    } );
