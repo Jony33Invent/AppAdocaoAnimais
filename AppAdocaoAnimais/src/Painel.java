@@ -83,6 +83,20 @@ private Image img;
 		add(label);
 		return label;
 	}
+		public JLabel addLabelWhite(String s, int x, int y,int size) {
+
+		Font font = new Font("Sansita One", Font.PLAIN, size);
+		JLabel label=new JLabel(s);    
+		label.setLocation(x,y);
+		label.setSize(300, 50);
+		label.setForeground(myWhite);
+
+		label.setFont(font);
+        //button.setOpaque(false);
+        //button.setBorderPainted(false);
+		add(label);
+		return label;
+	}
 	public JLabel addLabelRed(String s, int x, int y) {
 
 		Font font = new Font("Sansita One", Font.PLAIN, 20);

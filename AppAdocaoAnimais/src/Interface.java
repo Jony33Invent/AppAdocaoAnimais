@@ -245,20 +245,21 @@ public class Interface{
 	    p.addLabelWhite("Nome: "+a.getNome(), 100, 100);
 
 	    p.addLabelWhite("Idade: "+a.getIdade(), 100, 130);
+	    p.addLabelWhite("Sexo: "+a.getSexo(), 100, 160);
 
-	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 100, 160);
+	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 100, 190);
 
-	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 100, 190);
+	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 100, 220);
 
-	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 100, 220);
+	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 100, 250);
 
-	    p.addLabelWhite("Descrição: "+a.getDescricao(), 100, 250);
-	    
+	    p.addLabelWhite("Descrição: ", 100, 280);
+	    p.addLabelWhite(a.getDescricao(), 100, 300);
 	    JButton backBtn = p.addButton("Voltar", 100, 400);
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
-	    		OpenNewPainel(PessoalMenu());
+	    		OpenNewPainel(CadastrarAnimal());
 	    	}
 	    } );
 		
