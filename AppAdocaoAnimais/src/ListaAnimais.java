@@ -145,11 +145,11 @@ import java.util.List;
 			this.ordenaAnimaisPorIdade();
 			
 			int i = 0;
-			while(animais.get(i).getIdade() < Idade && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getIdade() < Idade) {
 				i++;
 			}
 			
-			while(animais.get(i).getIdade() == Idade && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getIdade() == Idade) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -196,11 +196,11 @@ import java.util.List;
 			this.ordenaAnimaisPorPorte();
 			
 			int i = 0;
-			while(animais.get(i).getPorte() < Porte && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getPorte() < Porte) {
 				i++;
 			}
 			
-			while(animais.get(i).getPorte() == Porte && i < this.num_animais) {
+			while(i < this.num_animais && animais.get(i).getPorte() == Porte) {
 				matchList.add(animais.get(i));
 				novaLista.num_animais++;
 				if(animais.get(i) instanceof Cachorro) novaLista.num_caes++;
@@ -212,7 +212,6 @@ import java.util.List;
 									
 			return novaLista;
 		}
-		
 		public List<Animal> getAll(){
 			return animais;
 		}

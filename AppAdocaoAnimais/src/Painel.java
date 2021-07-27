@@ -199,6 +199,19 @@ private Image img;
         add(field);
         return field;
 	}
+	public JTextField addTextFieldWhite(String s,int x, int y) {
+        JTextField field = new JTextField(8);
+
+		Font font = new Font("SansSerif", Font.BOLD, 15);
+	    addLabel(s,font,x-100,y-12);
+		 font = new Font("SansSerif", Font.PLAIN, 15);
+		field.setLocation(x,y);
+		field.setSize(180, 25);
+		field.setText("");
+		field.setFont(font);
+        add(field);
+        return field;
+	}
 	public JComboBox<String> addComboBox(String s,int x, int y, String s1[]) {
 	       
 		JComboBox<String> field = new JComboBox<String>(s1);
