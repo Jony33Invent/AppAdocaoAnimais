@@ -3,7 +3,7 @@ import java.awt.geom.*;
 import javax.swing.*;
 
 public  class TranslucentButtonIconTest {
-  public static JButton makeButton(String title,int w, int h) {
+  public static JButton makeButton(String title,int w, int h,boolean flow) {
     return new JButton(title) {
       @Override public void updateUI() {
         super.updateUI();
@@ -12,7 +12,8 @@ public  class TranslucentButtonIconTest {
         setHorizontalAlignment(SwingConstants.CENTER);
         setHorizontalTextPosition(SwingConstants.CENTER);
         setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8));
-        //setMargin(new Insets(2, 8, 2, 8));
+        if(flow)
+        	setMargin(new Insets(2, 8, 2, 8));
         setContentAreaFilled(false);
         setFocusPainted(false);
         setOpaque(false);
@@ -30,6 +31,8 @@ class TranslucentButtonIcon implements Icon {
   private int width;
   private int height;
   public TranslucentButtonIcon(int w, int h) {
+	  
+	  
 	  width=w-28;
 	  height=h-4;
   }
@@ -60,7 +63,7 @@ class TranslucentButtonIcon implements Icon {
     }
   }
   @Override public int getIconWidth()  {
-	  
+	 
     return width;
   }
   @Override public int getIconHeight() {

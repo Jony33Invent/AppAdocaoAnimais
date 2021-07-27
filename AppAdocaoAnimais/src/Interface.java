@@ -1,8 +1,10 @@
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -157,17 +159,17 @@ public class Interface{
 	    JButton backBtn=p.addButton("Voltar",100,400);
 	    caoBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(PainelPesquisar(0));
+	    	    OpenNewPainel(PainelPesquisar(1));
 	    	  } 
 	    	} );
 	    gatoBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(PainelPesquisar(1));
+	    	    OpenNewPainel(PainelPesquisar(2));
 	    	  } 
 	    	} );
 	    semPrefBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(PainelPesquisar(2));
+	    	    OpenNewPainel(PainelPesquisar(0));
 	    	  } 
 	    	} );
 	    backBtn.addActionListener(new ActionListener() { 
@@ -232,7 +234,7 @@ public class Interface{
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
-	    		OpenNewPainel(CadastrarAnimal());
+	    		OpenNewPainel(PessoalMenu());
 	    	} 
 	    } );
 	    
@@ -276,25 +278,35 @@ public class Interface{
 		Painel p = new Painel("img/bg_solido2.png");
 		
 		/* tipo
-		 *  0 -> cão
-		 *  1 -> gato
-		 *  2 -> ambos
+		 *  1 -> cão
+		 *  2 -> gato
+		 *  0 -> ambos
 		 */
 		String str="";
 		switch(tipo) {
-			case 0:
+			case 1:
 				str="Pesquisar por cão";
 			break;
-			case 1:
+			case 2:
 				str="Pesquisar por gato";
 			break;
-			case 2:
+			case 0:
 				str="Pesquisar";
 			break;
 		}
 				
 	    p.addLabelRed(str,35,100);
+
+	    JTextField nome = p.addTextFieldRed("Nome:", 130, 160);
+	    JTextField local = p.addTextFieldRed("Localização:", 130, 190);
 	    JButton backBtn=p.addButton("Voltar",100,400);
+	    JButton searchBtn=p.addButton("Pesquisar",100,300);
+	    
+	    searchBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    	    OpenNewPainel(ExibePesquisa());
+	    	  } 
+	    	} );
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
@@ -303,7 +315,23 @@ public class Interface{
 	    	} );
 	    return p;
 	}
-	
+	private Painel ExibePesquisa() {
+		Painel p=new Painel("img/bg_solido.png");
+	    p.setLayout(new FlowLayout());
+	    p.addLabelWhite("Resultados da busca",0,0);
+	    p.addButtonFlow("A",300,50);
+	    p.addButtonFlow("B",300,50);
+	    p.addButtonFlow("C",300,50);
+	    p.addButtonFlow("D",300,50);
+	    JButton backBtn=p.addButtonFlow("Voltar",150,50);
+	    
+	    backBtn.addActionListener(new ActionListener() { 
+	    	  public void actionPerformed(ActionEvent e) { 
+	    		  OpenNewPainel(AdotarMenu());
+	    	  } 
+	    	} );
+		return p;
+	}
 	// Sessão Institucional
 	private Painel PainelInstitucional() {
 		Painel p=new Painel("img/bg_solido.png");
@@ -327,7 +355,7 @@ public class Interface{
 	
 	public void ExibeTelaEntrada() {
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Painel p=CadastrarAnimal();
+		Painel p=ExibePesquisa();
 
 		tela.add(p);
 		tela.pack();

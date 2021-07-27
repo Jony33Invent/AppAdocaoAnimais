@@ -31,9 +31,20 @@ private Image img;
   public JButton addButton(String s, int x, int y) {
 
 		Font font = new Font("Sansita One", Font.PLAIN, 14);
-		JButton button=TranslucentButtonIconTest.makeButton(s,150,50);    
+		JButton button=TranslucentButtonIconTest.makeButton(s,150,50,false);    
 		button.setLocation(x,y);
         button.setSize(150, 50);
+
+		button.setFont(font);
+        //button.setOpaque(false);
+        //button.setBorderPainted(false);
+		add(button);
+		return button;
+	}
+  public JButton addButtonFlow(String s, int w, int h) {
+
+		Font font = new Font("Sansita One", Font.PLAIN, 14);
+		JButton button=TranslucentButtonIconTest.makeButton(s,w,h,true);    
 
 		button.setFont(font);
         //button.setOpaque(false);
@@ -44,7 +55,7 @@ private Image img;
 	public JButton addButton(String s, int x, int y,int w) {
 
 		Font font = new Font("Sansita One", Font.PLAIN, 14);
-		JButton button=TranslucentButtonIconTest.makeButton(s,w,50);    
+		JButton button=TranslucentButtonIconTest.makeButton(s,w,50,false);    
 		button.setLocation(x,y);
         button.setSize(w, 50);
 
@@ -58,7 +69,7 @@ private Image img;
 	public JButton addButton(String s, int x, int y,int w,int h) {
 
 		Font font = new Font("Sansita One", Font.PLAIN, 14);
-		JButton button=TranslucentButtonIconTest.makeButton(s,w,h);    
+		JButton button=TranslucentButtonIconTest.makeButton(s,w,h,false);    
 		button.setLocation(x,y);
         button.setSize(w, h);
 
