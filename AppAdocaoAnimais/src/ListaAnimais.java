@@ -211,9 +211,11 @@ import java.util.List;
 		public List<Animal> getAll(){
 			return animais;
 		}
+		
 		public void SetLista(List<Animal> novaLista){
 			animais=novaLista;
 		}
+		
 		public int getSize(){
 			return animais.size();
 		}
