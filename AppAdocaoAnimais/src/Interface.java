@@ -221,20 +221,12 @@ public class Interface{
 	    
 	    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
 	    cadastrarBtn.addActionListener(new ActionListener() { 
-	    	public void actionPerformed(ActionEvent e) { 
-	    		OpenNewPainel(PerfilAnimal());
+	    	public void actionPerformed(ActionEvent e) {
+	    		Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
+	    		    		descricao_animal);
+	    		OpenNewPainel(PerfilAnimal(animal));
 	    	} 
 	    } );
-	    
-	    if(tipo_animal == "Gato")
-	    	Gato gato = new Gato(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
-		    		descricao_animal);
-	    if else(tipo_animal == "Cachorro")
-	    	Cachorro cachorro = new Cachorro(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
-		    		descricao_animal);
-	    else
-		    Animal animal = new Animal(nome_animal, idade_animal, vacina_animal, castrado_animal, local_animal,
-		    		descricao_animal);
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
@@ -245,27 +237,28 @@ public class Interface{
 	    return p;
 	}
 	
-	private Painel PerfilAnimal() {
+	private Painel PerfilAnimal(Animal a) {
 		Painel p=new Painel("img/bg_solido.png");
 		
-	    p.addLabelWhite("Nome: ",100,100);
+	    p.addLabelWhite("Nome: ", 100, 100);
 
-	    p.addLabelWhite("Idade: ",100,130);
+	    p.addLabelWhite("Idade: ", 100, 130);
 
-	    p.addLabelWhite("Castrado: ",100,160);
+	    p.addLabelWhite("Castrado: ", 100, 160);
 
-	    p.addLabelWhite("Localização: ",100,190);
+	    p.addLabelWhite("Localização: ", 100, 190);
 
-	    p.addLabelWhite("Descrição: ",100,220);
+	    p.addLabelWhite("Descrição: ", 100, 220);
 	    
-	    JButton backBtn=p.addButton("Voltar",100,400);
+	    JButton backBtn = p.addButton("Voltar", 100, 400);
 	    
 	    backBtn.addActionListener(new ActionListener() { 
-	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(PessoalMenu());
-	    	  } 
-	    	} );
-		return p;
+	    	public void actionPerformed(ActionEvent e) { 
+	    		OpenNewPainel(PessoalMenu());
+	    	}
+	    } );
+		
+	    return p;
 	}
 	
 	private Painel PainelPesquisar(int tipo) {
