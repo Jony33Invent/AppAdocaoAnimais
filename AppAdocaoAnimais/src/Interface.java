@@ -15,9 +15,10 @@ import javax.swing.*;
 public class Interface{
 	
 	private JFrame tela;
-	
+	private ListaAnimais listaAnimais;
 	public Interface() {
 		tela=new JFrame("PET Adoption - App");
+		listaAnimais=new ListaAnimais();
 		try {
 		     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fonts//SansitaOne.ttf")));
@@ -200,7 +201,9 @@ public class Interface{
 	    
 	    cadastrarBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) {
-
+	    		
+	    		
+	    		// Salva dados do animal
 	    	    String nome_animal = nome.getText();
 	    	    String local_animal = local.getText();
 	    	    String tipo_animal = (String) tipo.getSelectedItem();
@@ -213,23 +216,17 @@ public class Interface{
 	    	    
 	    	    
 	    		
-	    		
+	    		// Adiciona animal na lista
 	    		if(tipo_animal == "Gato") {
 	    			Gato gato = new Gato(nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
-	    		
-	    			OpenNewPainel(PerfilAnimal(gato));
+	    			listaAnimais.add_animal_gato(gato);
+	    			OpenNewPainel(PerfilAnimal(gato,CadastrarAnimal()));
 				}
 	    		else if(tipo_animal == "Cachorro") {
 	    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
-	    		
-	    			OpenNewPainel(PerfilAnimal(cachorro));
+	    			listaAnimais.add_animal_cachorro(cachorro);
+	    			OpenNewPainel(PerfilAnimal(cachorro,CadastrarAnimal()));
 				}
-	    		else {
-		    		Animal animal = new Animal(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal,
-		    		    		descricao_animal, sexo_animal);
-								
-	    			OpenNewPainel(PerfilAnimal(animal));
-	    		}
 	    	}
 	    } );
 	    
@@ -242,7 +239,7 @@ public class Interface{
 	    return p;
 	}
 	
-	private Painel PerfilAnimal(Animal a) {
+	private Painel PerfilAnimal(Animal a,Painel pAnterior) {
 		Painel p=new Painel("img/bg_solido.png");
 		
 	    p.addLabelWhite("Nome: "+a.getNome(), 40, 100);
@@ -268,7 +265,7 @@ public class Interface{
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
-	    		OpenNewPainel(CadastrarAnimal());
+	    		OpenNewPainel(pAnterior);
 	    	}
 	    } );
 		
@@ -286,13 +283,13 @@ public class Interface{
 		String str="";
 		switch(tipo) {
 			case 1:
-				str="Pesquisar por cão";
+				str="Buscar por cão";
 			break;
 			case 2:
-				str="Pesquisar por gato";
+				str="Buscar por gato";
 			break;
 			case 0:
-				str="Pesquisar";
+				str="Buscar";
 			break;
 		}
 				
@@ -305,7 +302,8 @@ public class Interface{
 	    
 	    searchBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
-	    	    OpenNewPainel(ExibePesquisa());
+	    		
+	    	    OpenNewPainel(ExibePesquisa(tipo));
 	    	  } 
 	    	} );
 	    
@@ -316,21 +314,49 @@ public class Interface{
 	    	} );
 	    return p;
 	}
-	private Painel ExibePesquisa() {
+	private Painel ExibePesquisa(int tipo) {
+
 		Painel p=new Painel("img/bg_solido.png");
-	    p.setLayout(new FlowLayout());
-	    p.addLabelWhite("Resultados da busca",0,0);
-	    p.addButtonFlow("A",300,50);
-	    p.addButtonFlow("B",300,50);
-	    p.addButtonFlow("C",300,50);
-	    p.addButtonFlow("D",300,50);
-	    JButton backBtn=p.addButtonFlow("Voltar",150,50);
+		JScrollPane scroll=p.addScrollPane(-30,60);
+		Painel animais=new Painel("img/bg_solido2.png");
+	    String str="";
+		switch(tipo) {
+		case 1:
+			str="Resultados da busca por cão";
+		break;
+		case 2:
+			str="Resultados da busca por gato";
+		break;
+		case 0:
+			str="Resultados da busca";
+		break;
+	}
+	    p.addLabelWhite(str,20,5);
+
+	    JButton backBtn=p.addButton("Voltar",150,500);
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
 	    		  OpenNewPainel(AdotarMenu());
 	    	  } 
 	    	} );
+
+		animais.ChangeSize(new Dimension(300, 550));
+		animais.setLayout(new WrapLayout());
+
+		int i=0;
+	    for (Animal animal : listaAnimais.getAll()) {
+		    JButton perfilBtn=animais.addButtonFlow(animal.getNome(),300,50);
+		    perfilBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		OpenNewPainel(PerfilAnimal(animal,ExibePesquisa(tipo)));
+		    	} 
+		    } );
+		    i++;
+		    if(i>9)
+		    	break;
+	    }
+		scroll.setViewportView(animais);
 		return p;
 	}
 	// Sessão Institucional
@@ -356,7 +382,7 @@ public class Interface{
 	
 	public void ExibeTelaEntrada() {
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Painel p=ExibePesquisa();
+		Painel p=AdotarMenu();
 
 		tela.add(p);
 		tela.pack();

@@ -23,11 +23,28 @@ import java.util.List;
 			num_animais++;
 			num_caes++;
 		}
-		
+		public void add_animal_nome(String nom) {
+			Animal cao = new Cachorro(nom, 0, 0, true, true, "", "","Macho");
+			animais.add(cao);
+			num_animais++;
+			num_caes++;
+		}
 		/**/
 		public void add_animal_gato(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
 			Animal gato = new Gato(nom, id, porte, vac, cas, loc, des, sexo);
 			animais.add(gato);
+			num_animais++;
+			num_gatos++;
+		}
+		
+		public void add_animal_gato(Gato gato) {
+			animais.add(gato);
+			num_animais++;
+			num_gatos++;
+		}
+		
+		public void add_animal_cachorro(Cachorro cao) {
+			animais.add(cao);
 			num_animais++;
 			num_gatos++;
 		}
@@ -154,9 +171,15 @@ import java.util.List;
 			
 			return matchList;
 		}
-		
+
+		public List<Animal> getAll(){
+			return animais;
+		}
+
+		public int getSize(){
+			return animais.size();
+		}
 	}
-	
 	class SortByTipo implements Comparator<Animal>
 	{
 	    public int compare(Animal a, Animal b)

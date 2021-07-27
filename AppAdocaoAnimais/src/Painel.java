@@ -20,12 +20,19 @@ private Image img;
   }
   public Painel(Image img) {
 	    this.img = img;
-	    Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+	    Dimension size = new Dimension(350, 622);
 	    setPreferredSize(size);
 	    setMinimumSize(size);
 	    setMaximumSize(size);
 	    setSize(size);
 	    setLayout(null);
+  }
+  public void ChangeSize(Dimension size){
+
+	    setPreferredSize(size);
+	    setMinimumSize(size);
+	    setMaximumSize(size);
+	    setSize(size);
   }
   
   public JButton addButton(String s, int x, int y) {
@@ -41,15 +48,32 @@ private Image img;
 		add(button);
 		return button;
 	}
+  public JScrollPane addScrollPane(int x,int y) {
+	  JScrollPane pane=new JScrollPane();
+      pane.setBounds(x, y, 370, 400);
+      pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+	  add(pane);
+	  return pane;
+  }
   public JButton addButtonFlow(String s, int w, int h) {
 
 		Font font = new Font("Sansita One", Font.PLAIN, 14);
 		JButton button=TranslucentButtonIconTest.makeButton(s,w,h,true);    
-
 		button.setFont(font);
         //button.setOpaque(false);
         //button.setBorderPainted(false);
 		add(button);
+		return button;
+	}
+  public JButton addButtonFlow(String s, int w, int h,JScrollPane pane) {
+
+		Font font = new Font("Sansita One", Font.PLAIN, 14);
+		JButton button=TranslucentButtonIconTest.makeButton(s,w,h,true);    
+		button.setFont(font);
+        //button.setOpaque(false);
+        //button.setBorderPainted(false);
+		pane.add(button);
 		return button;
 	}
 	public JButton addButton(String s, int x, int y,int w) {
