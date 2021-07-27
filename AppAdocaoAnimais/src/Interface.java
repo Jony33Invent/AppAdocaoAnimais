@@ -215,19 +215,27 @@ public class Interface{
 	    	    boolean castrado_animal = castrado.isSelected();
 	    	    String descricao_animal = descricao.getText();
 	    	    
-	    	    
+	    	    if(!nome_animal.equals("")) {
+	    	    	if(!local_animal.equals("")) {
+			    		// Adiciona animal na lista
+			    		if(tipo_animal == "Gato") {
+			    			Gato gato = new Gato(nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+			    			listaAnimais.add_animal_gato(gato);
+			    			OpenNewPainel(PerfilAnimal(gato,CadastrarAnimal()));
+						}
+			    		else if(tipo_animal == "Cachorro") {
+			    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+			    			listaAnimais.add_animal_cao(cachorro);
+			    			OpenNewPainel(PerfilAnimal(cachorro,CadastrarAnimal()));
+						}
+	    	    	}else {
+	    	    		local.requestFocus();
+	    	    	}
+	    	    }else {
+	    	    	nome.requestFocus();
+	    	    }
 	    		
-	    		// Adiciona animal na lista
-	    		if(tipo_animal == "Gato") {
-	    			Gato gato = new Gato(nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
-	    			listaAnimais.add_animal_gato(gato);
-	    			OpenNewPainel(PerfilAnimal(gato,CadastrarAnimal()));
-				}
-	    		else if(tipo_animal == "Cachorro") {
-	    			Cachorro cachorro = new Cachorro(nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
-	    			listaAnimais.add_animal_cao(cachorro);
-	    			OpenNewPainel(PerfilAnimal(cachorro,CadastrarAnimal()));
-				}
+
 	    	}
 	    } );
 	    
@@ -242,15 +250,28 @@ public class Interface{
 	
 	private Painel PerfilAnimal(Animal a,Painel pAnterior) {
 		Painel p=new Painel("img/bg_solido.png");
+		if(a instanceof Cachorro)
+	    	p.addLabelWhite("Cão", 30, 10,15);
+		else if(a instanceof Gato) 
+		    	p.addLabelWhite("Gato", 30, 10,15);
 		
-	    p.addLabelWhite("Nome: "+a.getNome(), 40, 100);
+	    p.addLabelWhite(a.getNome(), 40, 70,40);
+	    
+	    int idade=a.getIdade();
+	    if(idade>0)
+	    	p.addLabelWhite(a.getIdade()+" anos", 40, 130);
+	    else
+	    	p.addLabelWhite("Menos de um ano", 40, 130);
+	    boolean macho=a.getSexo().equals("Macho");
+	    p.addLabelWhite(a.getSexo(), 225,190);
+	    if(macho) {
+		    p.addLabelWhite((a.isCastrado()?"Castrado":"Não castrado"), 40, 190);
+		    p.addLabelWhite((a.isVacinado()?"Vacinado":"Não vacinado"), 40, 220);
+	    }else {
 
-	    p.addLabelWhite("Idade: "+a.getIdade(), 40, 130);
-	    p.addLabelWhite("Sexo: "+a.getSexo(), 40, 160);
-
-	    p.addLabelWhite("Castrado: "+(a.isCastrado()?"Sim":"Não"), 40, 190);
-
-	    p.addLabelWhite("Vacinado: "+(a.isVacinado()?"Sim":"Não"), 40, 220);
+		    p.addLabelWhite((a.isCastrado()?"Castrada":"Não castrada"), 40, 190);
+		    p.addLabelWhite((a.isVacinado()?"Vacinada":"Não vacinada"), 40, 220);
+	    }
 
 	    p.addLabelWhite("Localização: "+a.getLocalizacao(), 40, 250);
 
@@ -261,8 +282,8 @@ public class Interface{
 	    	desc+=(parts[i]+"<br/>");
 	    desc+="</html>";
 	    
-	    p.addLabelWhite(desc, 40, 320,13);
-	    JButton backBtn = p.addButton("Voltar", 100, 400);
+	    p.addLabelWhite(desc, 40, 320,15);
+	    JButton backBtn = p.addButton("Voltar", 100, 500);
 	    
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
