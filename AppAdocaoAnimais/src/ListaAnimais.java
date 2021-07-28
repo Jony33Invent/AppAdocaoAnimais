@@ -16,22 +16,25 @@ import java.util.List;
 			num_gatos = 0;
 		}
 		
-		/**/
-		public void add_animal_cao(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
-			Animal cao = new Cachorro(nom, id, porte, vac, cas, loc, des,sexo);
+		public Animal pegaAnimal(int i) {
+			return this.animais.get(i);
+		}
+		
+
+		public void add_animal_cao(int key, String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal cao = new Cachorro(key, nom, id, porte, vac, cas, loc, des,sexo);
 			animais.add(cao);
 			num_animais++;
 			num_caes++;
 		}
-		public void add_animal_nome(String nom) {
-			Animal cao = new Cachorro(nom, 0, 0, true, true, "", "","Macho");
+		public void add_animal_nome(String nom, int key) {
+			Animal cao = new Cachorro(key, nom, 0, 0, true, true, "", "","Macho");
 			animais.add(cao);
 			num_animais++;
 			num_caes++;
 		}
-		/**/
-		public void add_animal_gato(String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
-			Animal gato = new Gato(nom, id, porte, vac, cas, loc, des, sexo);
+		public void add_animal_gato(int key, String nom,int id, int porte, boolean vac, boolean cas, String loc, String des,String sexo) {
+			Animal gato = new Gato(key, nom, id, porte, vac, cas, loc, des, sexo);
 			animais.add(gato);
 			num_animais++;
 			num_gatos++;
@@ -79,6 +82,13 @@ import java.util.List;
 		
 		public void ordenaAnimaisPorNome() {
 			Collections.sort(animais, new SortByNome());
+		}
+		
+		public void rmvAnimal(Animal animalRemovido) {
+			if(animalRemovido instanceof Cachorro) this.num_caes--;
+			else this.num_gatos--;
+			this.num_animais--;
+			this.animais.remove(animalRemovido);
 		}
 		
 		public ListaAnimais pesquisaPorTipo(int Tipo) {
@@ -219,7 +229,9 @@ import java.util.List;
 		public int getSize(){
 			return animais.size();
 		}
+		
 	}
+	
 	class SortByTipo implements Comparator<Animal>
 	{
 	    public int compare(Animal a, Animal b)

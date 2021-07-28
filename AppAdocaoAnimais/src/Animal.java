@@ -1,5 +1,6 @@
 
 public class Animal {
+	private int key;
 	private String nome;
 	private int idade;
 	private int porte;
@@ -11,7 +12,8 @@ public class Animal {
 
 	// Construtores
 
-	public Animal(String nom, int id, int porte, boolean vac, boolean cas, String loc, String des, String sexo) {
+	public Animal(int key, String nom, int id, int porte, boolean vac, boolean cas, String loc, String des, String sexo) {
+		setKey(key);
 		setNome(nom);
 		setIdade(id);
 		setPorte(porte);
@@ -33,6 +35,16 @@ public class Animal {
 		setIdade(id);
 		setLocalizacao(loc);
 		setDescricao(des);
+	}
+	
+	public String toString() {
+		String str = new String();
+		
+		str.concat(String.valueOf(this.key) + '|' + this.nome + '|' + String.valueOf(this.idade) + '|' + String.valueOf(this.porte)
+		+ '|' + String.valueOf(this.vacinado) + '|' + String.valueOf(this.castrado) + '|' + this.localizacao + '|' + this.descricao + '|' 
+		+ this.sexo + '\n');
+		
+		return str;
 	}
 	
 	// Getters and Setters
@@ -98,5 +110,13 @@ public class Animal {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 }
