@@ -84,6 +84,10 @@ import java.util.List;
 			Collections.sort(animais, new SortByNome());
 		}
 		
+		public void rmvAnimal(Animal animalRemovido) {
+			this.animais.remove(animalRemovido);
+		}
+		
 		public ListaAnimais pesquisaPorTipo(int Tipo) {
 			ListaAnimais novaLista = new ListaAnimais();
 			
@@ -222,7 +226,9 @@ import java.util.List;
 		public int getSize(){
 			return animais.size();
 		}
+		
 	}
+	
 	class SortByTipo implements Comparator<Animal>
 	{
 	    public int compare(Animal a, Animal b)
