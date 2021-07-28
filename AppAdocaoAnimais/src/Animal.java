@@ -9,7 +9,7 @@ public class Animal {
 	private String localizacao;
 	private String descricao;
 	private String sexo;
-
+	private Conta conta;
 	// Construtores
 
 	public Animal(int key, String nom, int id, int porte, boolean vac, boolean cas, String loc, String des, String sexo) {
@@ -23,7 +23,12 @@ public class Animal {
 		setDescricao(des);
 		setSexo(sexo);
 	}
-	
+	public void SetConta(Conta c) {
+		conta=c;
+	}
+	public Conta GetConta() {
+		return conta;
+	}
 	public Animal(String nom,int id,String loc) {
 		setNome(nom);
 		setIdade(id);

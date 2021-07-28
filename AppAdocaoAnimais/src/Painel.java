@@ -224,6 +224,19 @@ private Image img;
 		field.setFont(font);
         add(field);
         return field;
+	}	
+	public JComboBox<String> addComboBoxWhite(String s,int x, int y, String s1[]) {
+	       
+		JComboBox<String> field = new JComboBox<String>(s1);
+
+		Font font = new Font("SansSerif", Font.BOLD, 15);
+	    addLabel(s,font,x-100,y-12);
+		 font = new Font("SansSerif", Font.PLAIN, 15);
+		field.setLocation(x,y);
+		field.setSize(180, 25);
+		field.setFont(font);
+     add(field);
+     return field;
 	}
 	public JSpinner addNumericInput(String s,int x, int y) {
 		SpinnerModel model = new SpinnerNumberModel(0, 0, 99,1);              
@@ -231,6 +244,19 @@ private Image img;
 		JSpinner spinner = new JSpinner(model);
 		Font font = new Font("SansSerif", Font.BOLD, 15);
 	    addLabelRed(s,font,x-100,y-12);
+		 font = new Font("SansSerif", Font.PLAIN, 15);
+		 spinner.setLocation(x,y);
+		 spinner.setSize(60, 25);
+		 spinner.setFont(font);
+        add(spinner);
+        return spinner;
+	}	
+	public JSpinner addNumericInputWhite(String s,int x, int y) {
+		SpinnerModel model = new SpinnerNumberModel(0, 0, 99,1);              
+
+		JSpinner spinner = new JSpinner(model);
+		Font font = new Font("SansSerif", Font.BOLD, 15);
+	    addLabel(s,font,x-100,y-12);
 		 font = new Font("SansSerif", Font.PLAIN, 15);
 		 spinner.setLocation(x,y);
 		 spinner.setSize(60, 25);
@@ -247,6 +273,18 @@ private Image img;
 		 box.setOpaque(false);
 		 box.setFont(font);
 		 box.setForeground(myRed);
+        add(box);
+        return box;
+	}
+	public JCheckBox addCheckBoxWhite(String s,int x, int y) {
+		JCheckBox box = new JCheckBox(s);
+		Font font = new Font("SansSerif", Font.BOLD, 15);
+	    //addLabelRed(s,font,x-100,y-12);
+		 box.setLocation(x,y);
+		 box.setSize(150, 25);
+		 box.setOpaque(false);
+		 box.setFont(font);
+		 box.setForeground(myWhite);
         add(box);
         return box;
 	}
@@ -269,6 +307,21 @@ private Image img;
 
 		Font font = new Font("SansSerif", Font.BOLD, 15);
 	    addLabelRed(s,font,x-80,y);
+		 font = new Font("SansSerif", Font.PLAIN, 15);
+		 area.setLocation(x-80,y+40);
+		area.setSize(300, 120);
+		 area.setFont(font);
+		 Border border = BorderFactory.createLineBorder(Color.BLACK);
+		    area.setBorder(BorderFactory.createCompoundBorder(border,
+		            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        add(area);
+        return area;
+	}	
+	public JTextArea addTextAreaWhite(String s,int x, int y) {
+		JTextArea area = new JTextArea();
+
+		Font font = new Font("SansSerif", Font.BOLD, 15);
+	    addLabel(s,font,x-80,y);
 		 font = new Font("SansSerif", Font.PLAIN, 15);
 		 area.setLocation(x-80,y+40);
 		area.setSize(300, 120);

@@ -132,24 +132,28 @@ public class Interface{
 
 	    p.addLabelWhite("Cadastro - Pessoal",100,100);
 	    JTextField email=p.addTextField("Login:",100, 170);
+	    JTextField telefone=p.addTextField("Telefone:",100, 210);
+	    JTextField endereco=p.addTextField("Endereço:",100, 250);
 	    
-	    JPasswordField senha= p.addPasswordField("Senha:",100, 220);
+	    JPasswordField senha= p.addPasswordField("Senha:",100, 290);
 
-	    JPasswordField confSenha= p.addPasswordField("Conf. Senha:",100, 260);
-	    JButton enterAppBtn=p.addButton("Cadastrar",100,320);
-	    JButton backBtn=p.addButton("Voltar",100,400);
+	    JPasswordField confSenha= p.addPasswordField("Conf. Senha:",100, 320);
+	    JButton enterAppBtn=p.addButton("Cadastrar",100,400);
+	    JButton backBtn=p.addButton("Voltar",100,500);
 	    JLabel errorLabel=p.addLabelWhite("",130,280,12);
 	    enterAppBtn.addActionListener(new ActionListener() { 
 	    	  public void actionPerformed(ActionEvent e) { 
 	    		String emailTxt=email.getText();
+	    		String telefoneTxt=telefone.getText();
+	    		String enderecoTxt=endereco.getText();
 	    		String senhaTxt = new String(senha.getPassword());
 	    		String senha2Txt = new String(confSenha.getPassword());
-	    		if(emailTxt.equals("")) {
+	    		if(emailTxt.equals("") || telefoneTxt.equals("")|| enderecoTxt.equals("")) {
 	    			  errorLabel.setText("Login inválido.");
 	    			  email.requestFocus();
 	    		}else if(!listaContas.contaExistente(emailTxt)) {
 	    			  if(senhaTxt.length()>3 && senhaTxt.equals(senha2Txt)) {
-	    				  listaContas.addPessoa("", "", emailTxt, senhaTxt);
+	    				  listaContas.addPessoa(telefoneTxt, enderecoTxt, emailTxt, senhaTxt);
 	    		    	    OpenNewPainel(LoginPessoal());
 	    			  }else {
 	    				  errorLabel.setText("Senha incorreta.");
@@ -306,13 +310,16 @@ public class Interface{
 			    		// Adiciona animal na lista
 			    		if(tipo_animal == "Gato") {
 			    			Gato gato = new Gato(0,nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+			    			gato.SetConta(contaLogada);
 			    			listaAnimais.add_animal_gato(gato);
 			    			listaCadastrado.add_animal_gato(gato);
 			    			contaLogada.SetCadastrados(listaCadastrado);
+			    			
 			    			OpenNewPainel(PerfilAnimalEditavel(gato,CadastrarAnimal()));
 						}
 			    		else if(tipo_animal == "Cachorro") {
 			    			Cachorro cachorro = new Cachorro(0,nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+			    			cachorro.SetConta(contaLogada);
 			    			listaAnimais.add_animal_cao(cachorro);
 			    			listaCadastrado.add_animal_cao(cachorro);
 			    			contaLogada.SetCadastrados(listaCadastrado);
@@ -336,6 +343,26 @@ public class Interface{
 	    	} 
 	    } );
 	    
+	    return p;
+	}
+
+	private Painel InfoContato(Animal a,Painel pAnterior) {
+		Painel p=new Painel("img/bg_solido.png");
+		Conta contato=a.GetConta();
+	    p.addLabelWhite("Contato:", 40, 70,40);
+	    
+	    p.addLabelWhite(contato.getNome(), 40, 130);
+	    p.addLabelWhite(contato.getEndereco(), 40,190);
+		p.addLabelWhite(contato.getEmail(), 40, 220);
+
+	    JButton backBtn = p.addButton("Voltar", 100, 500);
+	    
+	    backBtn.addActionListener(new ActionListener() { 
+	    	public void actionPerformed(ActionEvent e) { 
+	    		OpenNewPainel(pAnterior);
+	    	}
+	    } );
+		
 	    return p;
 	}
 	
@@ -374,8 +401,13 @@ public class Interface{
 	    desc+="</html>";
 	    
 	    p.addLabelWhite(desc, 40, 320,20);
-	    JButton backBtn = p.addButton("Voltar", 100, 500);
-	    
+	    JButton adotarBtn = p.addButton("Adotar", 10, 500);
+	    JButton backBtn = p.addButton("Voltar", 170, 500);
+	    adotarBtn.addActionListener(new ActionListener() { 
+	    	public void actionPerformed(ActionEvent e) { 
+	    		OpenNewPainel(InfoContato(a,pAnterior));
+	    	}
+	    } );
 	    backBtn.addActionListener(new ActionListener() { 
 	    	public void actionPerformed(ActionEvent e) { 
 	    		OpenNewPainel(pAnterior);
@@ -623,10 +655,10 @@ public class Interface{
 		private Painel InstitucionalMenu() {
 			Painel p=new Painel("img/bg_solido3.png");
 
-		    p.addLabelWhite("O que deseja fazer?",80,100);
+		    p.addLabelWhite(contaLogada.getEmail(),80,100);
 
-		    JButton cadastrarBtn = p.addButton("Cadastrar animais",75,170,200);
-		    JButton atualizarBtn = p.addButton("Atualizar informações",75,240,200);
+		    JButton cadastrarBtn = p.addButton("Cadastrar novo",75,170,200);
+		    JButton atualizarBtn = p.addButton("Animais cadastrados",75,240,200);
 		    JButton backBtn = p.addButton("Voltar",100,400);
 		    
 		    cadastrarBtn.addActionListener(new ActionListener() { 
@@ -636,7 +668,7 @@ public class Interface{
 		    	} );
 		    atualizarBtn.addActionListener(new ActionListener() { 
 		    	  public void actionPerformed(ActionEvent e) { 
-		    	    //OpenNewPainel(CadastrarAnimal());
+		    	    OpenNewPainel(CadastroMenuInst());
 		    	  } 
 		    	} );
 		    backBtn.addActionListener(new ActionListener() { 
@@ -649,20 +681,20 @@ public class Interface{
 
 		private Painel CadastrarAnimalInst() {
 			Painel p = new Painel("img/bg_solido3.png");
-		    p.addLabelRed("Cadastro", 35, 20);
+		    p.addLabelWhite("Cadastro", 35, 20);
 
 		    String tipos[] = { "Gato", "Cachorro"};
 		    String sexos[] = { "Macho", "Fêmea"};
 		    
-		    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
+		    JTextField nome = p.addTextFieldWhite("Nome:", 130, 140);
 		    JButton backBtn = p.addButton("Voltar",160, 20);
-		    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
-		    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
-		    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
-		    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
-		    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
-		    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
-		    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
+		    JTextField local = p.addTextFieldWhite("Localização:", 130, 170);
+		    JComboBox<String> tipo = p.addComboBoxWhite("Tipo:", 130, 200, tipos);
+		    JComboBox<String> sexo = p.addComboBoxWhite("Sexo:", 130, 230, sexos);
+		    JSpinner idade = p.addNumericInputWhite("Idade:", 130, 260);
+		    JCheckBox vacinado = p.addCheckBoxWhite("Vacinado", 200, 260);
+		    JCheckBox castrado = p.addCheckBoxWhite("Castrado", 200, 290);
+		    JTextArea descricao = p.addTextAreaWhite("Descrição", 100, 310);
 		    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
 		    
 		    cadastrarBtn.addActionListener(new ActionListener() { 
@@ -685,6 +717,7 @@ public class Interface{
 				    		// Adiciona animal na lista
 				    		if(tipo_animal == "Gato") {
 				    			Gato gato = new Gato(0,nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+				    			gato.SetConta(contaLogada);
 				    			listaAnimais.add_animal_gato(gato);
 				    			listaCadastrado.add_animal_gato(gato);
 				    			contaLogada.SetCadastrados(listaCadastrado);
@@ -692,6 +725,7 @@ public class Interface{
 							}
 				    		else if(tipo_animal == "Cachorro") {
 				    			Cachorro cachorro = new Cachorro(0,nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+				    			cachorro.SetConta(contaLogada);
 				    			listaAnimais.add_animal_cao(cachorro);
 				    			listaCadastrado.add_animal_cao(cachorro);
 				    			contaLogada.SetCadastrados(listaCadastrado);
@@ -711,7 +745,7 @@ public class Interface{
 		    
 		    backBtn.addActionListener(new ActionListener() { 
 		    	public void actionPerformed(ActionEvent e) { 
-		    		OpenNewPainel(CadastroMenuInst());
+		    		OpenNewPainel(InstitucionalMenu());
 		    	} 
 		    } );
 		    
@@ -818,32 +852,37 @@ public class Interface{
 
 		    p.addLabelWhite("Cadastro - Institucional",70,100);
 		    JTextField email=p.addTextField("Login:",100, 170);
-		    JPasswordField senha= p.addPasswordField("Senha:",100, 220);
+		    JTextField telefone=p.addTextField("Telefone:",100, 210);
+		    JTextField endereco=p.addTextField("Endereço:",100, 250);
+		    
+		    JPasswordField senha= p.addPasswordField("Senha:",100, 290);
 
-		    JPasswordField confSenha= p.addPasswordField("Conf. Senha:",100, 260);
+		    JPasswordField confSenha= p.addPasswordField("Conf. Senha:",100, 320);
+		    JButton enterAppBtn=p.addButton("Cadastrar",100,400);
+		    JButton backBtn=p.addButton("Voltar",100,500);
 		    JLabel errorLabel=p.addLabelWhite("",130,280,12);
-		    JButton enterAppBtn=p.addButton("Cadastrar",100,320);
-		    JButton backBtn=p.addButton("Voltar",100,400);
 		    enterAppBtn.addActionListener(new ActionListener() { 
 		    	  public void actionPerformed(ActionEvent e) { 
-			    		String emailTxt=email.getText();
-			    		String senhaTxt = new String(senha.getPassword());
-			    		String senha2Txt = new String(confSenha.getPassword());
-			    		if(emailTxt.equals("")) {
-			    			  errorLabel.setText("Login inválido.");
-			    			  email.requestFocus();
-			    		}else if(!listaContas.contaExistente(emailTxt)) {
-			    			  if(senhaTxt.length()>3 && senhaTxt.equals(senha2Txt)) {
-			    				  listaContas.addEmpresa("", "", emailTxt, senhaTxt);
-			    		    	    OpenNewPainel(LoginInstitucional());
-			    			  }else {
-			    				  errorLabel.setText("Senha incorreta.");
-			    				  senha.requestFocus();
-			    			  }
-			    		  }else {
-			    			  errorLabel.setText("Conta já existe.");
-			    			  email.requestFocus();
-			    		  }
+		    		String emailTxt=email.getText();
+		    		String telefoneTxt=telefone.getText();
+		    		String enderecoTxt=endereco.getText();
+		    		String senhaTxt = new String(senha.getPassword());
+		    		String senha2Txt = new String(confSenha.getPassword());
+		    		if(emailTxt.equals("") || telefoneTxt.equals("")|| enderecoTxt.equals("")) {
+		    			  errorLabel.setText("Login inválido.");
+		    			  email.requestFocus();
+		    		}else if(!listaContas.contaExistente(emailTxt)) {
+		    			  if(senhaTxt.length()>3 && senhaTxt.equals(senha2Txt)) {
+		    				  listaContas.addEmpresa(telefoneTxt, enderecoTxt, emailTxt, senhaTxt);
+		    		    	    OpenNewPainel(LoginInstitucional());
+		    			  }else {
+		    				  errorLabel.setText("Senha incorreta.");
+		    				  senha.requestFocus();
+		    			  }
+		    		  }else {
+		    			  errorLabel.setText("Conta já existe.");
+		    			  email.requestFocus();
+		    		  }
 		    	  } 
 		    	} );
 		    backBtn.addActionListener(new ActionListener() { 
@@ -862,13 +901,13 @@ public class Interface{
 		    p.addLabelWhite("Meus cadastros",20,5);
 
 		    JButton backBtn=p.addButton("Voltar",170,500);
-		    JButton cadastrarBtn=p.addButton("Adicionar novo",10,500);
+		    //JButton cadastrarBtn=p.addButton("Adicionar novo",10,500);
 
-		    cadastrarBtn.addActionListener(new ActionListener() { 
+		    /*cadastrarBtn.addActionListener(new ActionListener() { 
 		    	  public void actionPerformed(ActionEvent e) { 
 		    	    OpenNewPainel(CadastrarAnimalInst());
 		    	  } 
-		    	} );
+		    	} );*/
 		    backBtn.addActionListener(new ActionListener() { 
 		    	  public void actionPerformed(ActionEvent e) { 
 		    		  OpenNewPainel(InstitucionalMenu());
