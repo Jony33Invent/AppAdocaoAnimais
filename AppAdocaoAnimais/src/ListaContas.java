@@ -78,14 +78,14 @@ public class ListaContas {
 		this.num_contas++;
 	}
 	
-	public boolean checkSenha(String email, String senha) {
-		if(!(this.contaExistente(email))) return false;
+	public Conta checkSenha(String email, String senha) {
+		if(!(this.contaExistente(email))) return null;
 		for(int i = 0; i < num_contas; i++) {
 			if(this.contas.get(i).getEmail().compareTo(email) == 0) {
-				if(this.contas.get(i).getSenha().compareTo(senha) == 0) return true;
-				else return false;
+				if(this.contas.get(i).getSenha().compareTo(senha) == 0) return this.contas.get(i);
+				else return null;
 			}
 		}
-		return false;
+		return null;
 	}
 }

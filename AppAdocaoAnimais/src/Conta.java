@@ -5,15 +5,23 @@ public class Conta {
 	private String endereco;
 	private String email;
 	private String senha;
-
+	private ListaAnimais lista;
+	
 	public Conta (int key, String nom, String end, String email, String senha) {
+		lista=new ListaAnimais();
 		setKey(key);
 		setEmail(email);
 		setSenha(senha);
 		setNome(nom);
 		setEndereco(end);
 	}
-	
+	public void SetCadastrados(ListaAnimais l) {
+		lista=l;
+	}
+
+	public ListaAnimais GetCadastrados() {
+		return lista;
+	}
 	public String toString() {
 		String str = new String();
 		
