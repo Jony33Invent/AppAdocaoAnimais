@@ -252,7 +252,6 @@ public class Interface{
 		animais.setLayout(new WrapLayout());
 		
 		int i=0;
-		
 	    for (Animal animal : listaCadastrado.getAll()) {
 		    JButton perfilBtn=animais.addButtonFlow(animal.getNome(),300,50);
 		    perfilBtn.addActionListener(new ActionListener() { 
@@ -427,7 +426,7 @@ public class Interface{
 	    		listaAnimais.rmvAnimal(a);
 	    		listaCadastrado.rmvAnimal(a);
 	    		contaLogada.SetCadastrados(listaCadastrado);
-	    		OpenNewPainel(pAnterior);
+	    		OpenNewPainel(CadastroMenu());
 	    	}
 	    } );
 	    backBtn.addActionListener(new ActionListener() { 
@@ -631,7 +630,7 @@ public class Interface{
 		    
 		    cadastrarBtn.addActionListener(new ActionListener() { 
 		    	  public void actionPerformed(ActionEvent e) { 
-		    	    //OpenNewPainel(CadastrarAnimal());
+		    	    OpenNewPainel(CadastrarAnimalInst());
 		    	  } 
 		    	} );
 		    atualizarBtn.addActionListener(new ActionListener() { 
@@ -644,6 +643,131 @@ public class Interface{
 		    	    OpenNewPainel(PainelInstitucional());
 		    	  } 
 		    	} );
+		    return p;
+		}
+
+		private Painel CadastrarAnimalInst() {
+			Painel p = new Painel("img/bg_solido3.png");
+		    p.addLabelRed("Cadastro", 35, 20);
+
+		    String tipos[] = { "Gato", "Cachorro"};
+		    String sexos[] = { "Macho", "Fêmea"};
+		    
+		    JTextField nome = p.addTextFieldRed("Nome:", 130, 140);
+		    JButton backBtn = p.addButton("Voltar",160, 20);
+		    JTextField local = p.addTextFieldRed("Localização:", 130, 170);
+		    JComboBox<String> tipo = p.addComboBox("Tipo:", 130, 200, tipos);
+		    JComboBox<String> sexo = p.addComboBox("Sexo:", 130, 230, sexos);
+		    JSpinner idade = p.addNumericInput("Idade:", 130, 260);
+		    JCheckBox vacinado = p.addCheckBox("Vacinado", 200, 260);
+		    JCheckBox castrado = p.addCheckBox("Castrado", 200, 290);
+		    JTextArea descricao = p.addTextArea("Descrição", 100, 310);
+		    JButton cadastrarBtn = p.addButton("Cadastrar", 160, 500);
+		    
+		    cadastrarBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) {
+		    		
+		    		
+		    		// Salva dados do animal
+		    	    String nome_animal = nome.getText();
+		    	    String local_animal = local.getText();
+		    	    String tipo_animal = (String) tipo.getSelectedItem();
+		    	    String sexo_animal = (String) sexo.getSelectedItem();
+		    	    int porte_animal=0;
+		    	    int idade_animal = (int) idade.getValue();
+		    	    boolean vacina_animal = vacinado.isSelected();
+		    	    boolean castrado_animal = castrado.isSelected();
+		    	    String descricao_animal = descricao.getText();
+		    	    
+		    	    if(!nome_animal.equals("")) {
+		    	    	if(!local_animal.equals("")) {
+				    		// Adiciona animal na lista
+				    		if(tipo_animal == "Gato") {
+				    			Gato gato = new Gato(0,nome_animal, idade_animal, porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+				    			listaAnimais.add_animal_gato(gato);
+				    			listaCadastrado.add_animal_gato(gato);
+				    			contaLogada.SetCadastrados(listaCadastrado);
+				    			OpenNewPainel(PerfilAnimalEditavelInst(gato,CadastrarAnimalInst()));
+							}
+				    		else if(tipo_animal == "Cachorro") {
+				    			Cachorro cachorro = new Cachorro(0,nome_animal, idade_animal,porte_animal, vacina_animal, castrado_animal, local_animal, descricao_animal, sexo_animal);
+				    			listaAnimais.add_animal_cao(cachorro);
+				    			listaCadastrado.add_animal_cao(cachorro);
+				    			contaLogada.SetCadastrados(listaCadastrado);
+				    			
+				    			OpenNewPainel(PerfilAnimalEditavelInst(cachorro,CadastrarAnimalInst()));
+							}
+		    	    	}else {
+		    	    		local.requestFocus();
+		    	    	}
+		    	    }else {
+		    	    	nome.requestFocus();
+		    	    }
+		    		
+
+		    	}
+		    } );
+		    
+		    backBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		OpenNewPainel(CadastroMenuInst());
+		    	} 
+		    } );
+		    
+		    return p;
+		}
+
+		private Painel PerfilAnimalEditavelInst(Animal a,Painel pAnterior) {
+			Painel p=new Painel("img/bg_solido3.png");
+			if(a instanceof Cachorro)
+		    	p.addLabelWhite("Cão", 30, 10,15);
+			else if(a instanceof Gato) 
+			    	p.addLabelWhite("Gato", 30, 10,15);
+			
+		    p.addLabelWhite(a.getNome(), 40, 70,40);
+		    
+		    int idade=a.getIdade();
+		    if(idade>0)
+		    	p.addLabelWhite(a.getIdade()+" anos", 40, 130);
+		    else
+		    	p.addLabelWhite("Menos de um ano", 40, 130);
+		    boolean macho=a.getSexo().equals("Macho");
+		    p.addLabelWhite(a.getSexo(), 225,190);
+		    if(macho) {
+			    p.addLabelWhite((a.isCastrado()?"Castrado":"Não castrado"), 40, 190);
+			    p.addLabelWhite((a.isVacinado()?"Vacinado":"Não vacinado"), 40, 220);
+		    }else {
+
+			    p.addLabelWhite((a.isCastrado()?"Castrada":"Não castrada"), 40, 190);
+			    p.addLabelWhite((a.isVacinado()?"Vacinada":"Não vacinada"), 40, 220);
+		    }
+
+		    p.addLabelWhite("Localização: "+a.getLocalizacao(), 40, 250);
+
+		    p.addLabelWhite("Descrição: ", 40, 280);
+		    String desc="<html>";
+		    String[] parts = a.getDescricao().split("\n");
+		    for(int i=0;i<parts.length;i++)
+		    	desc+=(parts[i]+"<br/>");
+		    desc+="</html>";
+		    
+		    p.addLabelWhite(desc, 40, 320,20);
+		    JButton backBtn = p.addButton("Voltar", 170, 500);
+		    JButton removerBtn = p.addButton("Remover", 10, 500);
+		    removerBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		listaAnimais.rmvAnimal(a);
+		    		listaCadastrado.rmvAnimal(a);
+		    		contaLogada.SetCadastrados(listaCadastrado);
+		    		OpenNewPainel(CadastroMenuInst());
+		    	}
+		    } );
+		    backBtn.addActionListener(new ActionListener() { 
+		    	public void actionPerformed(ActionEvent e) { 
+		    		OpenNewPainel(pAnterior);
+		    	}
+		    } );
+			
 		    return p;
 		}
 		
@@ -728,7 +852,47 @@ public class Interface{
 		    	} );
 		    return p;
 		}
-	
+
+		private Painel CadastroMenuInst() {
+			Painel p=new Painel("img/bg_solido3.png");
+
+			JScrollPane scroll=p.addScrollPane(-30,60);
+			Painel animais=new Painel("img/bg_solido2.png");
+		    p.addLabelWhite("Meus cadastros",20,5);
+
+		    JButton backBtn=p.addButton("Voltar",170,500);
+		    JButton cadastrarBtn=p.addButton("Adicionar novo",10,500);
+
+		    cadastrarBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    	    OpenNewPainel(CadastrarAnimalInst());
+		    	  } 
+		    	} );
+		    backBtn.addActionListener(new ActionListener() { 
+		    	  public void actionPerformed(ActionEvent e) { 
+		    		  OpenNewPainel(InstitucionalMenu());
+		    	  } 
+		    	} );
+		    
+			animais.ChangeSize(new Dimension(300, 550));
+			animais.setLayout(new WrapLayout());
+			
+			int i=0;
+		    for (Animal animal : listaCadastrado.getAll()) {
+			    JButton perfilBtn=animais.addButtonFlow(animal.getNome(),300,50);
+			    perfilBtn.addActionListener(new ActionListener() { 
+			    	public void actionPerformed(ActionEvent e) { 
+			    		OpenNewPainel(PerfilAnimalEditavelInst(animal,CadastroMenuInst()));
+			    	} 
+			    } );
+			    i++;
+			    if(i>9)
+			    	break;
+		    }
+			scroll.setViewportView(animais);
+			return p;
+		}
+		
 	public void ExibeTelaEntrada() {
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Painel p=PainelEntrada();
