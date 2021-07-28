@@ -85,6 +85,9 @@ import java.util.List;
 		}
 		
 		public void rmvAnimal(Animal animalRemovido) {
+			if(animalRemovido instanceof Cachorro) this.num_caes--;
+			else this.num_gatos--;
+			this.num_animais--;
 			this.animais.remove(animalRemovido);
 		}
 		
