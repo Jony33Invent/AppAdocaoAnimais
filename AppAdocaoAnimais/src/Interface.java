@@ -257,7 +257,7 @@ public class Interface{
 		    JButton perfilBtn=animais.addButtonFlow(animal.getNome(),300,50);
 		    perfilBtn.addActionListener(new ActionListener() { 
 		    	public void actionPerformed(ActionEvent e) { 
-		    		OpenNewPainel(PerfilAnimalEditavel(animal,PessoalMenu()));
+		    		OpenNewPainel(PerfilAnimalEditavel(animal,CadastroMenu()));
 		    	} 
 		    } );
 		    i++;
