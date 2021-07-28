@@ -132,6 +132,7 @@ public class Interface{
 
 	    p.addLabelWhite("Cadastro - Pessoal",100,100);
 	    JTextField email=p.addTextField("Login:",100, 170);
+	    
 	    JPasswordField senha= p.addPasswordField("Senha:",100, 220);
 
 	    JPasswordField confSenha= p.addPasswordField("Conf. Senha:",100, 260);
